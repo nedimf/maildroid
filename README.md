@@ -1,4 +1,3 @@
-
 <h1 align="center">
   <br>
   <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="Markdownify" width="200"></a>
@@ -224,7 +223,7 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 ## Team
 [![nedimf](https://avatars1.githubusercontent.com/u/24845593?v=3&s=144)](https://github.com/nedimf) 
 <br>
-[@nedimf](https://nedim.co) owner and maintainer **maildroid**
+[@nedimf](https://nedim.co) owner and maintainer of **maildroid**
 <br>
 Your name here :hearts:
 
