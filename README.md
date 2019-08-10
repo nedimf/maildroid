@@ -11,12 +11,6 @@
 <img alt="JitPack" src="https://img.shields.io/jitpack/v/github/nedimf/maildroid?color=%230000&style=flat-square">
 <a href="https://www.codacy.com/app/nedx45/maildroid?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nedimf/maildroid&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/0e4b1eea545649cbbc459d0a54bf64af"/></a>
 <img alt="JitPack - Downloads" src="https://img.shields.io/jitpack/dw/github/nedimf/maildroid?&style=flat-square">  
-  
-
-
-
-
-
 
 </p>
 
@@ -231,6 +225,8 @@ Your name here :hearts:
 Maildroid was born from the frustration of implementing a good emailing solution I had while developing a few client apps. I had to do many hours of unneeded work to make some emailing functions work using old libraries. Those libraries were limited to one SMTP server and because of that frustration ``Maildroid`` was born..
 
 ## FAQ 
+
+[![HitCount](http://hits.dwyl.io/nedimf/maildroid.svg)](http://hits.dwyl.io/nedimf/maildroid)
 
 - How to use Google `` gmail `` smtp server 
 > As stated above every smtp server that uses SSL should be supported.<br>Tutorial how to use ``smtp.gmail.com``: <br>
