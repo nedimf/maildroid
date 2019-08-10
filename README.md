@@ -248,3 +248,7 @@ Maildroid was born from the frustration of implementing a good emailing solution
 
 This part will grow more over time as question are posted.
 
+### Designer credits
+Icon made by [Designer](https://www.flaticon.com/authors/kiranshastry) & [Freepik](https://www.flaticon.com/authors/freepik) from [flaticon](https://www.flaticon.com/authors/freepik)
+
+
