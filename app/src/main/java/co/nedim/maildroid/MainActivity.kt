@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         val send:Button = findViewById(R.id.save);
 
         save.setOnClickListener(View.OnClickListener {
-            val mail = toMail.text.toString()
+            val to = toMail.text.toString()
             val text = text.text.toString()
 
-            send(mail,text)
+            send(to,text)
 
         })
 

@@ -22,12 +22,6 @@ import javax.mail.BodyPart
 import javax.mail.Multipart
 
 
-
-
-
-
-
-
 class MaildroidX(
     val to:String?,
     val from:String?,
