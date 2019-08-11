@@ -235,6 +235,7 @@ Maildroid was born from the frustration of implementing a good emailing solution
 ## FAQ 
 
 [![HitCount](http://hits.dwyl.io/nedimf/maildroid.svg)](http://hits.dwyl.io/nedimf/maildroid)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/nedimf)
 
 - How to use Google `` gmail `` smtp server 
 > As stated above every smtp server that uses SSL should be supported.<br>Tutorial how to use ``smtp.gmail.com``: <br>
