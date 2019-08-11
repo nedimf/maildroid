@@ -7,11 +7,18 @@
 </h1>
 
 <h4 align="center"> :tada: Maildroid is a small robust android library for sending emails using SMTP server :tada:</h4>
+<p align = "center">
+<a href="https://android-arsenal.com/details/1/7818"><img src="https://img.shields.io/badge/Android%20Arsenal-Maildroid-green.svg?style=flat-square" border="0" alt="Android Arsenal"></a>	
+</p>
+<br>
 <p align="center">
+
 <img alt="JitPack" src="https://img.shields.io/jitpack/v/github/nedimf/maildroid?color=%230000&style=flat-square">
 <a href="https://www.codacy.com/app/nedx45/maildroid?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nedimf/maildroid&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/0e4b1eea545649cbbc459d0a54bf64af"/></a>
 <img alt="JitPack - Downloads" src="https://img.shields.io/jitpack/dw/github/nedimf/maildroid?&style=flat-square">  
 <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/_nedimf?color=%23&label=Follow&style=social">
+	
+	
 </p>
 
 <p align="center">
@@ -227,8 +234,6 @@ Maildroid was born from the frustration of implementing a good emailing solution
 ## FAQ 
 
 [![HitCount](http://hits.dwyl.io/nedimf/maildroid.svg)](http://hits.dwyl.io/nedimf/maildroid)
-
-[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Maildroid-green.svg?style=flat )]( https://android-arsenal.com/details/1/7818 )
 
 - How to use Google `` gmail `` smtp server 
 > As stated above every smtp server that uses SSL should be supported.<br>Tutorial how to use ``smtp.gmail.com``: <br>
