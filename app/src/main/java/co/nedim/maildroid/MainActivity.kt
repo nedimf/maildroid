@@ -1,20 +1,15 @@
 package co.nedim.maildroid
 
 import android.app.ProgressDialog
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import co.nedim.maildroidx.MaildroidX
+import co.nedim.maildroidx.MaildroidXType
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.*
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             .smtpPassword("5c1874afe87151")
             .smtpAuthentication(true)
             .port("2525")
-            .type("HTML")
+            .type(MaildroidXType.HTML)
             .to(to)
             .from("someoneoverinterenet.com")
             .subject("Hello v1")

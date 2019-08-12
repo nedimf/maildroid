@@ -1,25 +1,19 @@
 package co.nedim.maildroidx
 
-import android.content.Context
 import android.os.Handler
 import android.util.Log
 import com.sun.mail.smtp.SMTPAddressFailedException
-import com.sun.mail.smtp.SMTPAddressSucceededException
 import java.io.IOException
 import java.lang.IllegalArgumentException
-import java.net.InterfaceAddress
-import java.util.*
 import javax.activation.DataHandler
 import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
-import javax.mail.util.ByteArrayDataSource
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMultipart
-import kotlin.collections.ArrayList
 import javax.activation.FileDataSource
 import javax.mail.BodyPart
-import javax.mail.Multipart
+
 
 
 class MaildroidX(
@@ -38,7 +32,9 @@ class MaildroidX(
     val mailSuccess:Boolean?
 
 
-){
+)
+{
+
 
     private constructor(builder: Builder) : this(
         builder.to,
@@ -106,7 +102,7 @@ class MaildroidX(
 
         fun attachment(attachments: String) = apply { this.attachments = attachments }
 
-        fun type(type: String) = apply { this.type = type }
+        fun type(type: MaildroidXType) = apply { this.type = type.toString() }
         
 
         fun onCompleteCallback(successCallback: onCompleteCallback?, timeout:Long) = apply {
@@ -242,4 +238,6 @@ class MaildroidX(
 
 
 }
+
+
 
