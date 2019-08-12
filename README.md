@@ -242,7 +242,7 @@ Maildroid was born from the frustration of implementing a good emailing solution
   - **``` smtp.("smtp.gmail.com")  ```**
   - **``` smtpUsername.("")  ```** your gmail email adress
   - **``` smtpPassword.("")  ```** your gmail password
-  - **``` smtpPort.("465")  ```** gmail TLS port
+  - **``` smtpPort.("465")  ```** gmail SSL port
 
 - How to test sending emails,but not to affect client
 > Maildroid works great with [mailtrap.io](https://mailtrap.io). They limit 50 message per inbox.Inbox can be erase at any time what it makes it one of the best solution for developers.
