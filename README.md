@@ -94,7 +94,8 @@ Add the dependency
 </details>
 
 ## Add to your app
-Adding Maildroid to your app is straight forword process. Library is using Builder pattern to achieve flexebilty and easy to read wholesome implementation
+Adding Maildroid to your app is straight forword process. Library is using Builder pattern to achieve flexebilty and easy to read wholesome implementation:
+
 ```kotlin
   MaildroidX.Builder()
             .smtp("")
@@ -118,6 +119,34 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             },3000)
             .mail()
 ```
+
+**DSL implementation:**
+
+```kotlin
+sendEmail {
+      smtp("smtp.mailtrap.io")
+      smtpUsername("username")
+      smtpPassword("password")
+      smtpAuthentication(true)
+      port("2525")
+      type(MaildroidXType.HTML)
+      to("johndoe@email.com")
+      from("janedoen@email.com")
+      subject("Hello!")
+      body("email body")
+      attachment("path_to_file/file.txt")
+      callback {
+          timeOut(3000)
+          onSuccess {
+              Log.d("MaildroidX",  "SUCCESS")
+          }
+          onFail {
+              Log.d("MaildroidX",  "FAIL")
+          }
+      }
+ }
+```
+
 ### Documentation
 ***
 #### Documentation for version v.0.0.1
