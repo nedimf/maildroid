@@ -3,12 +3,12 @@ package co.nedim.maildroid
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import co.nedim.maildroidx.MaildroidX
-import co.nedim.maildroidx.MaildroidXType
+import co.nedim.maildroidx.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,11 +27,37 @@ class MainActivity : AppCompatActivity() {
             val to = toMail.text.toString()
             val text = text.text.toString()
 
-            send(to,text)
+            sendDsl(to,text)
 
         })
 
 
+    }
+
+    private fun sendDsl(to:String,text:String) {
+        sendEmail {
+            smtp("smtp.mailtrap.io")
+            smtpUsername("")
+            smtpPassword("")
+            smtpAuthentication(true)
+            port("465")
+            type(MaildroidXType.HTML)
+            to(to)
+            from("someoneover@interenet.com")
+            subject("Hello v1")
+            body(text)
+            callback {
+                timeOut(3000)
+                onSuccess {
+                    Toast.makeText(this@MainActivity,"Mail sent!",Toast.LENGTH_SHORT).show()
+                    Log.d(TAG,  "SUCCESS")
+                }
+                onFail {
+                    Toast.makeText(this@MainActivity,"Error!",Toast.LENGTH_SHORT).show()
+                    Log.d(TAG,  "ERROR")
+                }
+            }
+        }
     }
 
     fun send(to:String,text:String){
@@ -54,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             .body(text)
             .attachment("${this@MainActivity.filesDir.path}/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
-
+                override val timeout: Long = 3000
 
                 override fun onSuccess() {
                     Toast.makeText(this@MainActivity,"Mail sent!",Toast.LENGTH_SHORT).show()
@@ -67,9 +93,12 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity,"Error!",Toast.LENGTH_SHORT).show()
                     pd.cancel()
                 }
-            },3000)
+            })
             .mail()
+    }
 
+    companion object {
+        val TAG = MainActivity::class.java.name
     }
 
 }
