@@ -102,7 +102,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .smtpPassword("")
             .smtpAuthentication()
             .port("")
-            .type("")
+            .type(MaildroidX.HTML)
             .to("")
             .from("")
             .subject("")
@@ -132,9 +132,9 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 - port
 > Constructor that is used to declare port of your server **(String)**
 - type
-> Constructor that is used to declare type of your content  **(String)**
-  >- HTML 
-  >- PLAIN
+> Constructor that is used to declare type of your content  **(MaildroidXType)**
+  >- MaildroidXType.HTML 
+  >- MaildroidXType.PLAIN
 - to 
 > Constructor that is used to declare internet adress where email will be send  **(String)** 
 - from
