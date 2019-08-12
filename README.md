@@ -219,7 +219,7 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 
 ### TODO
 ***
-- Add option to use more then one attachment
+- [Maildroid project board](https://github.com/nedimf/maildroid/projects/1)
 
 ## Team
 [![nedimf](https://avatars1.githubusercontent.com/u/24845593?v=3&s=144)](https://github.com/nedimf) 
