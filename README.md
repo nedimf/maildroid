@@ -255,6 +255,11 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 <br>
 [@nedimf](https://nedim.co) owner and maintainer of **maildroid**
 <br>
+
+![](https://avatars1.githubusercontent.com/u/24845593?s=150&v=4)    |   ![](https://avatars0.githubusercontent.com/u/19391446?s=150&v=4s)
+:-------------------------:|:-------------------------:
+[nedimf](https://github.com/nedimf) | [javier-moreno](https://github.com/javier-moreno)
+
 Your name here :hearts:
 
 ### Motivation
