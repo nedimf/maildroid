@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         MaildroidX.Builder()
             .smtp("smtp.mailtrap.io")
-            .smtpUsername("a9557779ce8689")
-            .smtpPassword("5c1874afe87151")
+            .smtpUsername("")
+            .smtpPassword("")
             .smtpAuthentication(true)
             .port("2525")
             .type(MaildroidXType.HTML)
