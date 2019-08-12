@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             .port("2525")
             .type(MaildroidXType.HTML)
             .to(to)
-            .from("someoneoverinterenet.com")
+            .from("someoneover@interenet.com")
             .subject("Hello v1")
             .body(text)
             .attachment("${this@MainActivity.filesDir.path}/abc.txt")

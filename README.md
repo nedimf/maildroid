@@ -1,4 +1,3 @@
-
 <h1 align="center">
   <br>
   <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="Markdownify" width="200"></a>
@@ -8,17 +7,18 @@
 </h1>
 
 <h4 align="center"> :tada: Maildroid is a small robust android library for sending emails using SMTP server :tada:</h4>
+<p align = "center">
+<a href="https://android-arsenal.com/details/1/7818"><img src="https://img.shields.io/badge/Android%20Arsenal-Maildroid-green.svg?style=flat-square" border="0" alt="Android Arsenal"></a>	
+</p>
+<br>
 <p align="center">
+
 <img alt="JitPack" src="https://img.shields.io/jitpack/v/github/nedimf/maildroid?color=%230000&style=flat-square">
-<a href="https://www.codacy.com/app/nedx45/maildroid?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nedimf/maildroid&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/0e4b1eea545649cbbc459d0a54bf64af"></a> 
-<img alt="JitPack - Downloads" src="https://img.shields.io/jitpack/dw/github/nedimf/maildroid?&style=flat-square">  
-  
-
-
-
-
-
-
+<a href="https://www.codacy.com/app/nedx45/maildroid?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nedimf/maildroid&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/0e4b1eea545649cbbc459d0a54bf64af"/></a>
+ <a href="https://www.reddit.com/r/androiddev/comments/cotfeb/maildroid_new_email_library/"><img alt="Reddit" src="https://img.shields.io/badge/Reddit-androiddev-orange"></a>
+ <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/_nedimf?color=%23&label=Follow&style=social">
+	
+	
 </p>
 
 <p align="center">
@@ -224,7 +224,7 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 ## Team
 [![nedimf](https://avatars1.githubusercontent.com/u/24845593?v=3&s=144)](https://github.com/nedimf) 
 <br>
-[@nedimf](https://nedim.co) owner and maintainer **maildroid**
+[@nedimf](https://nedim.co) owner and maintainer of **maildroid**
 <br>
 Your name here :hearts:
 
@@ -232,6 +232,9 @@ Your name here :hearts:
 Maildroid was born from the frustration of implementing a good emailing solution I had while developing a few client apps. I had to do many hours of unneeded work to make some emailing functions work using old libraries. Those libraries were limited to one SMTP server and because of that frustration ``Maildroid`` was born..
 
 ## FAQ 
+
+[![HitCount](http://hits.dwyl.io/nedimf/maildroid.svg)](http://hits.dwyl.io/nedimf/maildroid)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/nedimf)
 
 - How to use Google `` gmail `` smtp server 
 > As stated above every smtp server that uses SSL should be supported.<br>Tutorial how to use ``smtp.gmail.com``: <br>
@@ -248,4 +251,8 @@ Maildroid was born from the frustration of implementing a good emailing solution
 > Maildroid is open source and it **DOES NOT** save ANY data to extarnal servers or parties.
 
 This part will grow more over time as question are posted.
+
+### Designer credits
+Icon made by [Designer](https://www.flaticon.com/authors/kiranshastry) & [Freepik](https://www.flaticon.com/authors/freepik) from [flaticon](https://www.flaticon.com/authors/freepik)
+
 
