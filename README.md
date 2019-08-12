@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="Markdownify" width="200"></a>
+  <a href="http://www.nedim.co"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="nedim.co" width="200"></a>
   <br>
   Maildroid
   <br>
