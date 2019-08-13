@@ -109,6 +109,8 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .subject("")
             .body("")
             .attachment("")
+	    //or
+	    .attachments() //List<String>
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
                 override fun onSuccess() {
                     //Place for your code when email is sent successfully!
@@ -134,7 +136,9 @@ sendEmail {
       from("janedoen@email.com")
       subject("Hello!")
       body("email body")
-      attachment("path_to_file/file.txt")
+      attachment("path_to_file/file.txt") 
+      //or
+      attachments() //List<String>
       callback {
           timeOut(3000)
           onSuccess {
@@ -173,9 +177,9 @@ sendEmail {
 - body
 > Constructor that is used to declare body of email your sending **(String)** 
 - attachment
-> Constructor that is used to declare attachment of email in case that ones need to be added. **(String)** 
->- **Attachment in version 0.0.1 is single supported** in next version more attachments will be supported and they will  	   be type of an **ArrayString** 
-
+> Constructor that is used to declare attachment of email in case that ones need to be added **(String)** 
+- attachments 
+> Constructor that is used to declare unlimited number attachments into email **(List<String>)**
 - onCompleteCallback ()
 > When sending email is done, call this constructor to handle further actions in your app. 
 > Constructor is made out of two functions
