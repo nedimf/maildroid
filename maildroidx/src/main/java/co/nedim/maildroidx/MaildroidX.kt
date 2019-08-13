@@ -179,28 +179,36 @@ class MaildroidX(
                     // Set Subject: header field
                     message.subject = subject
 
-                    // Create the message part
-                    var messageBodyPart: BodyPart = MimeBodyPart()
 
-                    // Now set the actual message
-                    messageBodyPart.setContent(body,type)
 
-                    // Create a multipart message
-                    val multipart = MimeMultipart()
+                    if(attachments !== null) {
 
-                    // Set text message part
-                    multipart.addBodyPart(messageBodyPart)
+                        // Create the message part
+                        var messageBodyPart: BodyPart = MimeBodyPart()
 
-                    // Part two is attachment
-                    messageBodyPart = MimeBodyPart()
-                    val filename = attachments
-                    val source = FileDataSource(filename)
-                    messageBodyPart.setDataHandler(DataHandler(source))
-                    messageBodyPart.setFileName(filename)
-                    multipart.addBodyPart(messageBodyPart)
+                        // Now set the actual message
+                        messageBodyPart.setContent(body,type)
 
-                    // Send the complete message parts
-                    message.setContent(multipart)
+                        // Create a multipart message
+                        val multipart = MimeMultipart()
+
+                        // Set text message part
+                        multipart.addBodyPart(messageBodyPart)
+
+                        // Part two is attachment
+                        messageBodyPart = MimeBodyPart()
+
+                        val filename = attachments
+
+                        messageBodyPart.attachFile(filename)
+                        multipart.addBodyPart(messageBodyPart)
+
+
+                        // Send the complete message parts
+                        message.setContent(multipart)
+                    }else{
+                        message.setContent(body,type)
+                    }
 
                     // Send message
                     Transport.send(message)
