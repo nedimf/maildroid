@@ -252,7 +252,7 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 
 ## Team
 
-![](https://avatars1.githubusercontent.com/u/24845593?s=150&v=4)    |   ![](https://avatars0.githubusercontent.com/u/19391446?s=150&v=4s)
+![](https://avatars1.githubusercontent.com/u/24845593?s=150&v=4)    |   ![](https://avatars1.githubusercontent.com/u/9919?s=150&v=4)
 :-------------------------:|:-------------------------:
 [nedimf](https://github.com/nedimf) | [javier-moreno](https://github.com/javier-moreno)
 
