@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             .from("someoneover@interenet.com")
             .subject("Hello v1")
             .body(text)
-            //.attachment("${this@MainActivity.filesDir.path}/abc.txt")
+            .attachment("${this@MainActivity.filesDir.path}/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
 
 

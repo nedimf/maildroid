@@ -207,6 +207,7 @@ class MaildroidX(
                         // Send the complete message parts
                         message.setContent(multipart)
                     }else{
+                        //If there is no multipart setContent body and type
                         message.setContent(body,type)
                     }
 
