@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     fun send(to:String,text:String){
 
+
         val pd:ProgressDialog = ProgressDialog(this@MainActivity)
         pd.setTitle("Send email!")
         pd.setMessage("Sending...")

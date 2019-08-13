@@ -214,7 +214,6 @@ class MaildroidX(
                             multipart.addBodyPart(attachmentPart)
                         }
                     }else{
-                            println("Filename single")
                             attachment?.let { filename ->
                             messageBodyPart.attachFile(filename)
                             multipart.addBodyPart(messageBodyPart)
