@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="Markdownify" width="200"></a>
+  <a href="http://www.nedim.co"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="nedim.co" width="200"></a>
   <br>
   Maildroid
   <br>
@@ -94,7 +94,8 @@ Add the dependency
 </details>
 
 ## Add to your app
-Adding Maildroid to your app is straight forword process. Library is using Builder pattern to achieve flexebilty and easy to read wholesome implementation
+Adding Maildroid to your app is straight forword process. Library is using Builder pattern to achieve flexebilty and easy to read wholesome implementation:
+
 ```kotlin
   MaildroidX.Builder()
             .smtp("")
@@ -102,7 +103,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .smtpPassword("")
             .smtpAuthentication()
             .port("")
-            .type("")
+            .type(MaildroidX.HTML)
             .to("")
             .from("")
             .subject("")
@@ -118,6 +119,34 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             },3000)
             .mail()
 ```
+
+**DSL implementation:**
+
+```kotlin
+sendEmail {
+      smtp("smtp.mailtrap.io")
+      smtpUsername("username")
+      smtpPassword("password")
+      smtpAuthentication(true)
+      port("2525")
+      type(MaildroidXType.HTML)
+      to("johndoe@email.com")
+      from("janedoen@email.com")
+      subject("Hello!")
+      body("email body")
+      attachment("path_to_file/file.txt")
+      callback {
+          timeOut(3000)
+          onSuccess {
+              Log.d("MaildroidX",  "SUCCESS")
+          }
+          onFail {
+              Log.d("MaildroidX",  "FAIL")
+          }
+      }
+ }
+```
+
 ### Documentation
 ***
 #### Documentation for version v.0.0.1
@@ -132,9 +161,9 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 - port
 > Constructor that is used to declare port of your server **(String)**
 - type
-> Constructor that is used to declare type of your content  **(String)**
-  >- HTML 
-  >- PLAIN
+> Constructor that is used to declare type of your content  **(MaildroidXType)**
+  >- MaildroidXType.HTML 
+  >- MaildroidXType.PLAIN
 - to 
 > Constructor that is used to declare internet adress where email will be send  **(String)** 
 - from
@@ -219,13 +248,14 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 
 ### TODO
 ***
-- Add option to use more then one attachment
+- [Maildroid project board](https://github.com/nedimf/maildroid/projects/1)
 
 ## Team
-[![nedimf](https://avatars1.githubusercontent.com/u/24845593?v=3&s=144)](https://github.com/nedimf) 
-<br>
-[@nedimf](https://nedim.co) owner and maintainer of **maildroid**
-<br>
+
+![](https://avatars1.githubusercontent.com/u/24845593?s=150&v=4)    |   ![](https://avatars0.githubusercontent.com/u/19391446?s=150&v=4s)
+:-------------------------:|:-------------------------:
+[nedimf](https://github.com/nedimf) | [javier-moreno](https://github.com/javier-moreno)
+
 Your name here :hearts:
 
 ### Motivation
@@ -242,7 +272,7 @@ Maildroid was born from the frustration of implementing a good emailing solution
   - **``` smtp.("smtp.gmail.com")  ```**
   - **``` smtpUsername.("")  ```** your gmail email adress
   - **``` smtpPassword.("")  ```** your gmail password
-  - **``` smtpPort.("465")  ```** gmail TLS port
+  - **``` smtpPort.("465")  ```** gmail SSL port
 
 - How to test sending emails,but not to affect client
 > Maildroid works great with [mailtrap.io](https://mailtrap.io). They limit 50 message per inbox.Inbox can be erase at any time what it makes it one of the best solution for developers.
