@@ -14,8 +14,6 @@ import javax.mail.internet.MimeMultipart
 import javax.activation.FileDataSource
 import javax.mail.BodyPart
 
-
-
 class MaildroidX(
     val to:String?,
     val from:String?,
@@ -49,11 +47,11 @@ class MaildroidX(
         builder.attachments,
         builder.type,
         builder.successCallback,
-        builder.mailSuccess)
+        builder.mailSuccess
+    )
 
 
-
-    class Builder {
+    open class Builder {
         var to:String? = null
             private set
         var from:String? = null
@@ -103,9 +101,9 @@ class MaildroidX(
         fun attachment(attachments: String) = apply { this.attachments = attachments }
 
         fun type(type: MaildroidXType) = apply { this.type = type.toString() }
-        
 
-        fun onCompleteCallback(successCallback: onCompleteCallback?, timeout:Long) = apply {
+
+        fun onCompleteCallback(successCallback: onCompleteCallback?) = apply {
 
             Handler().postDelayed({
                 if(mailSuccess) {
@@ -113,10 +111,10 @@ class MaildroidX(
                 }else{
                     successCallback?.onFail()
                 }
-            }, timeout)
-            }
+            }, successCallback?.timeout ?: 0)
+        }
 
-            fun mail(): Boolean {
+        fun mail(): Boolean {
 
             val typeHTML:String = "text/html"
             val typePLAIN:String = "text/plain"
@@ -133,7 +131,7 @@ class MaildroidX(
                     throw IllegalArgumentException("MaildroidX detected that you didn't pass [smtp] value in to the builder!")
 
                 if(!smtpAuthentication)
-                   throw IllegalArgumentException("MaildroidX detected that you didn't pass [smtpAuthentication] value to the builder!")
+                    throw IllegalArgumentException("MaildroidX detected that you didn't pass [smtpAuthentication] value to the builder!")
 
                 if(port.isEmpty())
                     throw IllegalArgumentException("MaildroidX detected that you didn't pass [port] value to the builder!")
@@ -147,11 +145,11 @@ class MaildroidX(
                     throw AuthenticationFailedException("MaildroidX detected that you didn't pass [smtpUsername] or [smtpPassword] to the builder!")
 
 
-                    props.put("mail.smtp.host", smtp)
-                    props.put("mail.smtp.socketFactory.port", port)
-                    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
-                    props.put("mail.smtp.auth", smtpAuthentication)
-                    props.put("mail.smtp.port", port)
+                props.put("mail.smtp.host", smtp)
+                props.put("mail.smtp.socketFactory.port", port)
+                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
+                props.put("mail.smtp.auth", smtpAuthentication)
+                props.put("mail.smtp.port", port)
 
 
 
@@ -179,37 +177,29 @@ class MaildroidX(
                     // Set Subject: header field
                     message.subject = subject
 
+                    // Create the message part
+                    var messageBodyPart: BodyPart = MimeBodyPart()
 
+                    // Now set the actual message
+                    messageBodyPart.setContent(body,type)
 
-                    if(attachments !== null) {
+                    // Create a multipart message
+                    val multipart = MimeMultipart()
 
-                        // Create the message part
-                        var messageBodyPart: BodyPart = MimeBodyPart()
+                    // Set text message part
+                    multipart.addBodyPart(messageBodyPart)
 
-                        // Now set the actual message
-                        messageBodyPart.setContent(body,type)
-
-                        // Create a multipart message
-                        val multipart = MimeMultipart()
-
-                        // Set text message part
+                    // Part two is attachment
+                    messageBodyPart = MimeBodyPart()
+                    attachments?.let { filename ->
+                        val source = FileDataSource(filename)
+                        messageBodyPart.setDataHandler(DataHandler(source))
+                        messageBodyPart.setFileName(filename)
                         multipart.addBodyPart(messageBodyPart)
-
-                        // Part two is attachment
-                        messageBodyPart = MimeBodyPart()
-
-                        val filename = attachments
-
-                        messageBodyPart.attachFile(filename)
-                        multipart.addBodyPart(messageBodyPart)
-
-
-                        // Send the complete message parts
-                        message.setContent(multipart)
-                    }else{
-                        //If there is no multipart setContent body and type
-                        message.setContent(body,type)
                     }
+
+                    // Send the complete message parts
+                    message.setContent(multipart)
 
                     // Send message
                     Transport.send(message)
@@ -230,7 +220,7 @@ class MaildroidX(
                     Log.i("IOException","IOException " + e.printStackTrace())
                 }
             }
-                return false
+            return false
         }
 
 
@@ -243,6 +233,39 @@ class MaildroidX(
     interface onCompleteCallback {
         fun onSuccess()
         fun onFail()
+        val timeout: Long
+
+        open class Builder(
+            private var onSuccess: (() -> Unit)? = null,
+            private var onFail: (() -> Unit)? = null,
+            private var timeout: Long = 3000
+        ) {
+
+            fun timeOut(timeout: Long) = apply {
+                this.timeout = timeout
+            }
+
+            fun onSuccess(onSuccess: () -> Unit) = apply {
+                this.onSuccess = onSuccess
+            }
+
+            fun onFail(onFail: () -> Unit) = apply {
+                this.onFail = onFail
+            }
+
+            fun build(): onCompleteCallback = object : onCompleteCallback {
+                override val timeout: Long = this@Builder.timeout
+
+                override fun onSuccess() {
+                    this@Builder.onSuccess?.invoke()
+                }
+
+                override fun onFail() {
+                    this@Builder.onFail?.invoke()
+                }
+
+            }
+        }
     }
 
 

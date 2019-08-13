@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             val to = toMail.text.toString()
             val text = text.text.toString()
 
-            sendDsl(to,text)
+            send(to,text)
 
         })
 
