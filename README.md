@@ -111,15 +111,16 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .attachment("")
 	    //or
 	    .attachments() //List<String>
-            .onCompleteCallback(object : MaildroidX.onCompleteCallback{
-                override fun onSuccess() {
-                    //Place for your code when email is sent successfully!
-                }
-                override fun onFail() {
-                   //Place for your code when email is not sent!
-                }
-            },3000)
-            .mail()
+	    .onCompleteCallback(object : MaildroidX.onCompleteCallback{
+		override val timeout: Long = 3000
+			override fun onSuccess() {
+  				Log.d("MaildroidX",  "SUCCESS")			  
+			}
+			override fun onFail() {
+			         Log.d("MaildroidX",  "FAIL")
+			}
+	     })
+	     .mail()
 ```
 
 **DSL implementation:**
