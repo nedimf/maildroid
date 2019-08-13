@@ -161,6 +161,8 @@ class MaildroidX(
                         }
                     })
 
+
+
                 try {
                     // Create a default MimeMessage object.
                     val message = MimeMessage(session)
@@ -168,6 +170,12 @@ class MaildroidX(
                     // Set From: header field of the header.
                     message.setFrom(InternetAddress(from))
 
+                    if(to?.indexOf(",")!! >0){
+
+                        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+                        Log.d("More then one ","mail address")
+
+                    }
                     // Set To: header field of the header.
                     message.setRecipients(
                         Message.RecipientType.TO,
@@ -192,9 +200,7 @@ class MaildroidX(
                     // Part two is attachment
                     messageBodyPart = MimeBodyPart()
                     attachments?.let { filename ->
-                        val source = FileDataSource(filename)
-                        messageBodyPart.setDataHandler(DataHandler(source))
-                        messageBodyPart.setFileName(filename)
+                        messageBodyPart.attachFile(filename)
                         multipart.addBodyPart(messageBodyPart)
                     }
 
@@ -225,9 +231,6 @@ class MaildroidX(
 
 
 
-
-
-        //fun build() = MaildroidX(context,to,from,subject,body,smtp,smtpUsername,smtpPassword,port,smtpAuthentication,attachments,type,onCompleteCallback, onFailureCallback)
     }
 
     interface onCompleteCallback {

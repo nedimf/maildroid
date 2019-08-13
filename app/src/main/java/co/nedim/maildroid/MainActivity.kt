@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     private fun sendDsl(to:String,text:String) {
         sendEmail {
             smtp("smtp.mailtrap.io")
-            smtpUsername("")
-            smtpPassword("")
+            smtpUsername("a9557779ce8689")
+            smtpPassword("5c1874afe87151")
             smtpAuthentication(true)
             port("465")
             type(MaildroidXType.HTML)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             .from("someoneover@interenet.com")
             .subject("Hello v1")
             .body(text)
-            .attachment("${this@MainActivity.filesDir.path}/abc.txt")
+           // .attachment("${this@MainActivity.filesDir.path}/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
                 override val timeout: Long = 3000
 
