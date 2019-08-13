@@ -153,7 +153,7 @@ sendEmail {
 
 ### Documentation
 ***
-#### Documentation for version v.0.0.1
+#### Documentation for version v.0.0.2-alpha
 - smtp
 > Constructor that is used to declare SMTP server your will use **(String)** 
 - smtpUsername
