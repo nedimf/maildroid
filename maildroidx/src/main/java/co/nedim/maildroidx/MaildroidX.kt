@@ -5,13 +5,11 @@ import android.util.Log
 import com.sun.mail.smtp.SMTPAddressFailedException
 import java.io.IOException
 import java.lang.IllegalArgumentException
-import javax.activation.DataHandler
 import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMultipart
-import javax.activation.FileDataSource
 import javax.mail.BodyPart
 
 class MaildroidX(
@@ -24,7 +22,8 @@ class MaildroidX(
     val smtpPassword:String?,
     val port: String,
     val smtpAuthentication:Boolean,
-    val attachments: String?,
+    val attachment: String?,
+    val attachments: List<String>?,
     val type:String?,
     val successCallback: onCompleteCallback?,
     val mailSuccess:Boolean?
@@ -44,6 +43,7 @@ class MaildroidX(
         builder.smtpPassword,
         builder.port,
         builder.smtpAuthentication,
+        builder.attachment,
         builder.attachments,
         builder.type,
         builder.successCallback,
@@ -70,7 +70,9 @@ class MaildroidX(
             private set
         var smtpAuthentication:Boolean = false
             private set
-        var attachments:String? = null
+        var attachment:String? = null
+            private set
+        var attachments: List<String>? = null
             private set
         var type:String? = null
             private set
@@ -98,7 +100,9 @@ class MaildroidX(
 
         fun smtpAuthentication(smtpAuthentication: Boolean) = apply { this.smtpAuthentication = smtpAuthentication }
 
-        fun attachment(attachments: String) = apply { this.attachments = attachments }
+        fun attachment(attachment: String) = apply { this.attachment = attachment }
+
+        fun attachments(attachments: List<String>) = apply { this.attachments = attachments }
 
         fun type(type: MaildroidXType) = apply { this.type = type.toString() }
 
@@ -171,6 +175,7 @@ class MaildroidX(
                     message.setFrom(InternetAddress(from))
 
 
+
                     // Set To: header field of the header.
                     message.setRecipients(
                         Message.RecipientType.TO,
@@ -194,9 +199,26 @@ class MaildroidX(
 
                     // Part two is attachment
                     messageBodyPart = MimeBodyPart()
-                    attachments?.let { filename ->
-                        messageBodyPart.attachFile(filename)
-                        multipart.addBodyPart(messageBodyPart)
+
+                    /**
+                     * Checking if there is any files in attachment constructor.
+                     * If there is files in attachments ,make multipart for each of it
+                     * Add it to multipart for sending
+                     * If there is no attachments processed with sing attachment if it s not null
+                     */
+                    if(attachments != null && attachments!!.isNotEmpty() && attachments!!.size > 1){
+
+                        for (i in attachments!!){
+                            val attachmentPart = MimeBodyPart()
+                            attachmentPart.attachFile(i)
+                            multipart.addBodyPart(attachmentPart)
+                        }
+                    }else{
+                            println("Filename single")
+                            attachment?.let { filename ->
+                            messageBodyPart.attachFile(filename)
+                            multipart.addBodyPart(messageBodyPart)
+                        }
                     }
 
                     // Send the complete message parts
