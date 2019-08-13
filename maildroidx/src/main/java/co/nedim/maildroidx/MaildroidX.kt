@@ -170,12 +170,7 @@ class MaildroidX(
                     // Set From: header field of the header.
                     message.setFrom(InternetAddress(from))
 
-                    if(to?.indexOf(",")!! >0){
 
-                        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-                        Log.d("More then one ","mail address")
-
-                    }
                     // Set To: header field of the header.
                     message.setRecipients(
                         Message.RecipientType.TO,
