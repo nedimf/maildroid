@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     private fun sendDsl(to:String,text:String) {
         sendEmail {
             smtp("smtp.mailtrap.io")
-            smtpUsername("a9557779ce8689")
-            smtpPassword("5c1874afe87151")
+            smtpUsername("")
+            smtpPassword("")
             smtpAuthentication(true)
             port("465")
             type(MaildroidXType.HTML)
