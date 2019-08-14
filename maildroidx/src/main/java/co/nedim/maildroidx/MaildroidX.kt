@@ -9,6 +9,7 @@ import javax.mail.*
 import javax.mail.BodyPart
 import javax.mail.internet.*
 
+
 class MaildroidX(
     val to:String?,
     val from:String?,
@@ -230,8 +231,19 @@ class MaildroidX(
                     mailSuccess = true
                     Log.w("Success", "Success, mail sent [STATUS: $mailSuccess]")
 
-
-
+                    /**
+                     *
+                     * @exception MessagingException The base class for all exceptions thrown by the Messaging classes
+                     * @exception SMTPAddressSucceededException extends MessagingException
+                       This exception is chained off a SendFailedException when the mail.smtp.reportsuccess property is true. It indicates an address to which the message was sent. The command will be an SMTP RCPT command and the return code will be the return code from that command.
+                     * @exception SMTPAddressFailedException extends MessagingException
+                     * This exception is thrown when the message cannot be sent.
+                       The exception includes those addresses to which the message could not be sent as well as the valid addresses to which the message was sent and valid addresses to which the message was not sent.
+                     * @exception SMTPSendFailedException
+                        This exception will usually appear first in a chained list of exceptions, followed by SMTPAddressFailedExceptions and/or SMTPAddressSucceededExceptions, * one per address. This exception corresponds to one of the SMTP commands used to send a message, such as the MAIL, DATA, and "end of data" commands, but not including the RCPT command.
+                     * @exception SMTPSenderFailedException
+                       The exception includes the sender's address, which the mail server rejected.
+                     */
 
                 } catch (e: MessagingException) {
                     Log.e("MessagingException", e.toString())
