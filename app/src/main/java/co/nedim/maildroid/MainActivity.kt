@@ -62,9 +62,8 @@ class MainActivity : AppCompatActivity() {
 
     fun send(to:String,text:String){
 
-
         val pd:ProgressDialog = ProgressDialog(this@MainActivity)
-        pd.setTitle("Send email!")
+        pd.setTitle("Send email")
         pd.setMessage("Sending...")
         pd.show()
 
@@ -79,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             .from("someoneover@interenet.com")
             .subject("Hello v1")
             .body(text)
+            .attachment(this@MainActivity.filesDir.path +  "/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
                 override val timeout: Long = 3000
 

@@ -2,15 +2,12 @@ package co.nedim.maildroidx
 
 import android.os.Handler
 import android.util.Log
-import com.sun.mail.smtp.SMTPAddressFailedException
+import com.sun.mail.smtp.*
 import java.io.IOException
 import java.lang.IllegalArgumentException
 import javax.mail.*
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeMessage
-import javax.mail.internet.MimeBodyPart
-import javax.mail.internet.MimeMultipart
 import javax.mail.BodyPart
+import javax.mail.internet.*
 
 class MaildroidX(
     val to:String?,
@@ -31,6 +28,7 @@ class MaildroidX(
 
 )
 {
+
 
 
     private constructor(builder: Builder) : this(
@@ -80,6 +78,8 @@ class MaildroidX(
             private set
         var mailSuccess:Boolean = false
             private set
+
+        private var errorMessage: String? = null
 
 
         fun to(to: String) = apply { this.to = to }
@@ -167,6 +167,7 @@ class MaildroidX(
 
 
 
+
                 try {
                     // Create a default MimeMessage object.
                     val message = MimeMessage(session)
@@ -230,21 +231,40 @@ class MaildroidX(
                     Log.w("Success", "Success, mail sent [STATUS: $mailSuccess]")
 
 
+
+
                 } catch (e: MessagingException) {
-                    e.printStackTrace()
-                } catch (e: SMTPAddressFailedException){
-                    Log.i("SMTPAddressFailed","SMTPAddressFailedException: Mail is not sent!")
+                    Log.e("MessagingException", e.toString())
+                    errorMessage = e.toString()
+                }
+                catch (e: SMTPAddressSucceededException){
+                    Log.e("SMTPAddressSEx", e.toString())
+                    errorMessage = e.toString()
+
+                }catch (e: SMTPAddressFailedException){
+                    Log.e("SMTPAddressFEx", e.toString())
+                    errorMessage = e.toString()
+
+
+                }catch (e: SMTPSendFailedException){
+                    Log.e("SMTPSendFEx", e.toString())
+                    errorMessage = e.toString()
+
+
+                }catch (e: SMTPSenderFailedException){
+                    Log.e("SMTPSenderFEx", e.toString())
+                    errorMessage = e.toString()
 
                 }
-                catch (e: MessagingException){
-                    e.printStackTrace()
-                }catch (e: IOException){
-                    Log.i("IOException","IOException " + e.printStackTrace())
+
+                catch (e: IOException){
+                    Log.e("IOException","IOException " + e.printStackTrace())
+                    errorMessage = e.toString()
+
                 }
             }
             return false
         }
-
 
 
     }
@@ -253,6 +273,8 @@ class MaildroidX(
         fun onSuccess()
         fun onFail()
         val timeout: Long
+
+
 
         open class Builder(
             private var onSuccess: (() -> Unit)? = null,
