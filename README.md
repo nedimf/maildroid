@@ -103,7 +103,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .smtpPassword("")
             .smtpAuthentication()
             .port("")
-            .type(MaildroidX.HTML)
+            .type(MaildroidXType.HTML)
             .to("")
             .from("")
             .subject("")
