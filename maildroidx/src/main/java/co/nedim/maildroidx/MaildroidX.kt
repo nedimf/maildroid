@@ -132,11 +132,10 @@ class MaildroidX(
 
         fun mail() {
             if(context?.let { InternetService.isInternetAvailable(it) }!!){
-                Log.d("InternetServiceX","Network available")
                 send()
 
             }else{
-                Log.d("InternetServiceX","Network not available")
+                Log.d("InternetServiceX","Network is not available!")
             }
         }
 

@@ -33,12 +33,9 @@ object InternetService {
                 !ipAddress.equals("")
 
             } catch (e: UnknownHostException) {
-                Log.d("InternetService","Network is not available")
                 false
-
             }
         }else {
-            Log.d("InternetService","Network is not available")
             false
 
         }
