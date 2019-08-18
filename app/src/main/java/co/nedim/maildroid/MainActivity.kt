@@ -13,29 +13,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val toMail: EditText = findViewById(R.id.mail)
         val text:EditText = findViewById(R.id.text)
-        val send:Button = findViewById(R.id.save);
+        val send:Button = findViewById(R.id.sendBTN)
 
-        save.setOnClickListener(View.OnClickListener {
+        send.setOnClickListener(View.OnClickListener {
             val to = toMail.text.toString()
             val text = text.text.toString()
 
-            send(to,text)
+            sendDsl(to,text)
 
         })
-
-
     }
 
     private fun sendDsl(to:String,text:String) {
         sendEmail {
+            context(this@MainActivity)
             smtp("smtp.mailtrap.io")
             smtpUsername("")
             smtpPassword("")
@@ -68,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         pd.show()
 
         MaildroidX.Builder()
+            .context(this@MainActivity)
             .smtp("smtp.mailtrap.io")
             .smtpUsername("")
             .smtpPassword("")

@@ -1,7 +1,9 @@
 package co.nedim.maildroidx
 
+import android.content.Context
 import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import com.sun.mail.smtp.*
 import java.io.IOException
 import java.lang.IllegalArgumentException
@@ -11,6 +13,7 @@ import javax.mail.internet.*
 
 
 class MaildroidX(
+    val context: Context?,
     val to:String?,
     val from:String?,
     val subject:String?,
@@ -33,6 +36,7 @@ class MaildroidX(
 
 
     private constructor(builder: Builder) : this(
+        builder.context,
         builder.to,
         builder.from,
         builder.subject ,
@@ -51,6 +55,8 @@ class MaildroidX(
 
 
     open class Builder {
+        var context:Context? = null
+            private set
         var to:String? = null
             private set
         var from:String? = null
@@ -82,6 +88,7 @@ class MaildroidX(
 
         private var errorMessage: String? = null
 
+        fun context(context: Context) = apply { this.context = context }
 
         fun to(to: String) = apply { this.to = to }
 
@@ -119,7 +126,26 @@ class MaildroidX(
             }, successCallback?.timeout ?: 0)
         }
 
-        fun mail(): Boolean {
+        /**
+         * method mail() from version v0.0.2 is calling send()
+         */
+
+        fun mail() {
+            if(context?.let { InternetService.isInternetAvailable(it) }!!){
+                Log.d("InternetServiceX","Network available")
+                send()
+
+            }else{
+                Log.d("InternetServiceX","Network not available")
+            }
+        }
+
+
+        /**
+         * method send() is sending email through SMTP server
+         */
+        fun send(): Boolean {
+
 
             val typeHTML:String = "text/html"
             val typePLAIN:String = "text/plain"
@@ -165,8 +191,6 @@ class MaildroidX(
                             return PasswordAuthentication(smtpUsername, smtpPassword)
                         }
                     })
-
-
 
 
                 try {
@@ -228,7 +252,10 @@ class MaildroidX(
                     // Send message
                     Transport.send(message)
 
+
+
                     mailSuccess = true
+
                     Log.w("Success", "Success, mail sent [STATUS: $mailSuccess]")
 
                     /**

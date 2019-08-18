@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="co.nedim.maildroidx"/>
+          package="co.nedim.maildroidx">
+    <!-- permission for checking NEWTORK state in InternetService.kt -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+</manifest>
