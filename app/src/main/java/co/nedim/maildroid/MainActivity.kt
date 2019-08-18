@@ -22,10 +22,15 @@ class MainActivity : AppCompatActivity() {
         val send:Button = findViewById(R.id.sendBTN)
 
         send.setOnClickListener(View.OnClickListener {
-            val to = toMail.text.toString()
+            val recipient = toMail.text.toString()
             val text = text.text.toString()
 
-            sendDsl(to,text)
+            if(recipient.isNotEmpty() || text.isNotEmpty()){
+                send(recipient,text)
+            }else{
+                Toast.makeText(this@MainActivity,"Please check your input",Toast.LENGTH_SHORT).show()
+            }
+
 
         })
     }
