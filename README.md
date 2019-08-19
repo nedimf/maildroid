@@ -61,7 +61,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.2-alpha'
+	        implementation 'com.github.nedimf:maildroid:v0.0.2'
           }
 ```
 
@@ -156,7 +156,7 @@ sendEmail {
 
 ### Documentation
 ***
-#### Documentation for version v.0.0.2-alpha
+#### Documentation for version v.0.0.2
 - context
 > Constructor that is used to declare context **(Context)**
 - smtp
