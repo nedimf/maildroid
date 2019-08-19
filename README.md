@@ -98,6 +98,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 
 ```kotlin
   MaildroidX.Builder()
+            .context()
             .smtp("")
             .smtpUsername("")
             .smtpPassword("")
@@ -127,6 +128,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 
 ```kotlin
 sendEmail {
+      context() // Context in Kotlin Activity@this
       smtp("smtp.mailtrap.io")
       smtpUsername("username")
       smtpPassword("password")
@@ -155,6 +157,8 @@ sendEmail {
 ### Documentation
 ***
 #### Documentation for version v.0.0.2-alpha
+- context
+> Constructor that is used to declare context **(Context)**
 - smtp
 > Constructor that is used to declare SMTP server your will use **(String)** 
 - smtpUsername
