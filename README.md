@@ -289,6 +289,9 @@ Maildroid was born from the frustration of implementing a good emailing solution
 - Do this library save any of those data to external parties or servers?
 > Maildroid is open source and it **DOES NOT** save ANY data to extarnal servers or parties.
 
+- Do this library needs AndroidX to run properly?
+> Yes,project needs to be compatible with AndroidX [QUICK GUIDE](https://www.youtube.com/watch?v=0FZ_eUIsLTg)
+
 This part will grow more over time as question are posted.
 
 ### Designer credits
