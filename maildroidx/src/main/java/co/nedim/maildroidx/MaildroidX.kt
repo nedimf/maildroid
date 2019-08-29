@@ -13,7 +13,6 @@ import javax.mail.internet.*
 
 
 class MaildroidX(
-    val context: Context?,
     val to:String?,
     val from:String?,
     val subject:String?,
@@ -36,7 +35,6 @@ class MaildroidX(
 
 
     private constructor(builder: Builder) : this(
-        builder.context,
         builder.to,
         builder.from,
         builder.subject ,
@@ -55,8 +53,6 @@ class MaildroidX(
 
 
     open class Builder {
-        var context:Context? = null
-            private set
         var to:String? = null
             private set
         var from:String? = null
@@ -87,8 +83,6 @@ class MaildroidX(
             private set
 
         private var errorMessage: String? = null
-
-        fun context(context: Context) = apply { this.context = context }
 
         fun to(to: String) = apply { this.to = to }
 

@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendDsl(to:String,text:String) {
         sendEmail {
-            context(this@MainActivity)
             smtp("smtp.mailtrap.io")
             smtpUsername("")
             smtpPassword("")
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         pd.show()
 
         MaildroidX.Builder()
-            .context(this@MainActivity)
             .smtp("smtp.mailtrap.io")
             .smtpUsername("")
             .smtpPassword("")
