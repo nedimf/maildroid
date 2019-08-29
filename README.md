@@ -21,6 +21,8 @@
 	
 </p>
 
+ 
+
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#add-to-your-project">Add to your project</a> •
@@ -28,6 +30,8 @@
   <a href="#development">Development</a> •
   <a href="#faq">FAQ</a>
 </p>
+
+``Latest active version is v0.0.3``
 
 ![screenshot](https://raw.githubusercontent.com/nedimf/maildroid/master/show.gif)
 Library is using Oracle [Java Mail API](https://javaee.github.io/javamail/Android) to handle connections and sending emails.
@@ -117,7 +121,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 		override fun onSuccess() {
   			Log.d("MaildroidX",  "SUCCESS")			  
 		}
-		override fun onFail() {
+		override fun onFail(errorMessage: String) {
 			 Log.d("MaildroidX",  "FAIL")
 		}
 	     })
@@ -156,9 +160,9 @@ sendEmail {
 
 ### Documentation
 ***
-#### Documentation for version v.0.0.2
+#### Documentation for version v.0.0.3
 - context
-> Constructor that is used to declare context **(Context)**
+> Constructor that is used to declare context **(Context)** **DEPRECATED**
 - smtp
 > Constructor that is used to declare SMTP server your will use **(String)** 
 - smtpUsername
@@ -189,7 +193,7 @@ sendEmail {
 > When sending email is done, call this constructor to handle further actions in your app. 
 > Constructor is made out of two functions
 >- onSuccess() that handles when email is succssfully sent
-> - onFail() that handles any error in sending email
+> - onFail() that handles any error in sending email ``from version v0.0.3 it containes errorMessage (String)``
 > - timeout value that is used to predict timout how long will it take for email to be sent defualt is 3 seconds **(Long)** 
 - mail () 
 > Function that is called when email is ready to be sent
