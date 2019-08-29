@@ -114,6 +114,10 @@ class MaildroidX(
 
         fun type(type: MaildroidXType) = apply { this.type = type.toString() }
 
+        /**
+         * onCompleteCallback
+         * Version v0.0.3 ,errorMessage is provided for user in form of String
+         */
 
         fun onCompleteCallback(successCallback: onCompleteCallback?) = apply {
 
@@ -121,7 +125,7 @@ class MaildroidX(
                 if(mailSuccess) {
                     successCallback?.onSuccess()
                 }else{
-                    successCallback?.onFail()
+                    errorMessage?.let { successCallback?.onFail(it) }
                 }
             }, successCallback?.timeout ?: 0)
         }
@@ -131,12 +135,7 @@ class MaildroidX(
          */
 
         fun mail() {
-            if(context?.let { InternetService.isInternetAvailable(it) }!!){
-                send()
-
-            }else{
-                Log.d("InternetServiceX","Network is not available!")
-            }
+                send() //Check for internet connection is DEPRECATED in version 0.0.3
         }
 
 
@@ -309,9 +308,8 @@ class MaildroidX(
 
     interface onCompleteCallback {
         fun onSuccess()
-        fun onFail()
+        fun onFail(errorMessage:String)
         val timeout: Long
-
 
 
         open class Builder(
@@ -339,7 +337,7 @@ class MaildroidX(
                     this@Builder.onSuccess?.invoke()
                 }
 
-                override fun onFail() {
+                override fun onFail(errorMessage: String) {
                     this@Builder.onFail?.invoke()
                 }
 

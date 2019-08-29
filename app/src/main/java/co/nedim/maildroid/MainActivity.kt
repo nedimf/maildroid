@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             .body(text)
             .attachment(this@MainActivity.filesDir.path +  "/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
-                override val timeout: Long = 3000
+                override val timeout: Long = 4000 //Add timeout accordingly
 
                 override fun onSuccess() {
                     Toast.makeText(this@MainActivity,"Mail sent!",Toast.LENGTH_SHORT).show()
@@ -91,11 +91,12 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                override fun onFail() {
+                override fun onFail(errorMessage: String) {
 
-                    Toast.makeText(this@MainActivity,"Error!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, errorMessage,Toast.LENGTH_SHORT).show()
                     pd.cancel()
                 }
+
             })
             .mail()
     }
