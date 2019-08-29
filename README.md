@@ -61,7 +61,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.2-alpha'
+	        implementation 'com.github.nedimf:maildroid:v0.0.2'
           }
 ```
 
@@ -98,6 +98,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 
 ```kotlin
   MaildroidX.Builder()
+            .context()
             .smtp("")
             .smtpUsername("")
             .smtpPassword("")
@@ -127,6 +128,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
 
 ```kotlin
 sendEmail {
+      context() // Context in Kotlin Activity@this
       smtp("smtp.mailtrap.io")
       smtpUsername("username")
       smtpPassword("password")
@@ -154,7 +156,9 @@ sendEmail {
 
 ### Documentation
 ***
-#### Documentation for version v.0.0.2-alpha
+#### Documentation for version v.0.0.2
+- context
+> Constructor that is used to declare context **(Context)**
 - smtp
 > Constructor that is used to declare SMTP server your will use **(String)** 
 - smtpUsername
@@ -284,6 +288,9 @@ Maildroid was born from the frustration of implementing a good emailing solution
 
 - Do this library save any of those data to external parties or servers?
 > Maildroid is open source and it **DOES NOT** save ANY data to extarnal servers or parties.
+
+- Do this library needs AndroidX to run properly?
+> Yes,project needs to be compatible with AndroidX [QUICK GUIDE](https://www.youtube.com/watch?v=0FZ_eUIsLTg)
 
 This part will grow more over time as question are posted.
 
