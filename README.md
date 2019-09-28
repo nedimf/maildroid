@@ -65,7 +65,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.2'
+	        implementation 'com.github.nedimf:maildroid:v0.0.3'
           }
 ```
 

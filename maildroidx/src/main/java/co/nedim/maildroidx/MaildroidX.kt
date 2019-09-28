@@ -139,7 +139,7 @@ class MaildroidX(
         fun send(): Boolean {
 
 
-            val typeHTML:String = "text/html"
+            val typeHTML:String = "text/html; charset=utf-8"
             val typePLAIN:String = "text/plain"
 
             if(type.equals("HTML"))
