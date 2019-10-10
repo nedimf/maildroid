@@ -272,6 +272,9 @@ Your name here :hearts:
 ### Motivation
 Maildroid was born from the frustration of implementing a good emailing solution I had while developing a few client apps. I had to do many hours of unneeded work to make some emailing functions work using old libraries. Those libraries were limited to one SMTP server and because of that frustration ``Maildroid`` was born..
 
+## Showcase
+-[MacroDroid](https://play.google.com/store/apps/details?id=com.arlosoft.macrodroid&hl=en_US) is using this library (check issue #17 for proof)
+
 ## FAQ 
 
 [![HitCount](http://hits.dwyl.io/nedimf/maildroid.svg)](http://hits.dwyl.io/nedimf/maildroid)
