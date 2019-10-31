@@ -27,6 +27,7 @@
   <a href="#key-features">Key Features</a> •
   <a href="#add-to-your-project">Add to your project</a> •
   <a href="#documentation">Documentation</a> •
+  <a href="#showcase">Showcase</a> •
   <a href="#development">Development</a> •
   <a href="#faq">FAQ</a>
 </p>
