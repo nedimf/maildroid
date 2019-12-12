@@ -33,6 +33,8 @@
 </p>
 
 ``Latest active version is v0.0.3``
+</br>
+```Library status: ACTIVE```
 
 ![screenshot](https://raw.githubusercontent.com/nedimf/maildroid/master/show.gif)
 Library is using Oracle [Java Mail API](https://javaee.github.io/javamail/Android) to handle connections and sending emails.
