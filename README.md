@@ -5,8 +5,6 @@
   Maildroid
   <br>
 </h1>
-Reddit user: @nedxy (https://www.reddit.com/user/n3dxy)[Proof for reddit ask mne anything]
-
 <h4 align="center"> :tada: Maildroid is a small robust android library for sending emails using SMTP server :tada:</h4>
 <p align = "center">
 <a href="https://android-arsenal.com/details/1/7818"><img src="https://img.shields.io/badge/Android%20Arsenal-Maildroid-green.svg?style=flat-square" border="0" alt="Android Arsenal"></a>	
@@ -273,7 +271,11 @@ We strive to make `` maildroid `` best mailing library out there. We have ideas 
 
 Your name here :hearts:
 
+
 ### Motivation
+
+About me: Reddit user: @nedxy [Proof for reddit ask me anything](https://www.reddit.com/user/n3dxy)
+
 Maildroid was born from the frustration of implementing a good emailing solution I had while developing a few client apps. I had to do many hours of unneeded work to make some emailing functions work using old libraries. Those libraries were limited to one SMTP server and because of that frustration ``Maildroid`` was born..
 
 ## Showcase
