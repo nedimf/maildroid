@@ -5,6 +5,7 @@
   Maildroid
   <br>
 </h1>
+Reddit user: @nedxy (r/iAmA)[https://www.reddit.com/user/n3dxy]
 
 <h4 align="center"> :tada: Maildroid is a small robust android library for sending emails using SMTP server :tada:</h4>
 <p align = "center">
