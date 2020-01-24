@@ -224,6 +224,19 @@ These exceptions are called when username or password on SMTP server is not corr
 - ``` IOException ```
 > File in attachment not found or not existent
 
+#### Proguard
+
+```
+-keep class org.apache.** { *; }
+-dontwarn org.apache.**
+
+-keep class com.sun.mail.** { *; }
+-dontwarn com.sun.mail.**
+
+-keep class java.beans.** { *; }
+-dontwarn java.beans.**
+```
+
 ## Development
 We love open source :hearts: <br>
 Contributing to our project is really easy if you follow these steps.
