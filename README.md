@@ -33,7 +33,8 @@
 
 ``Latest active version is v0.0.3``
 </br>
-```Library status: ACTIVE```
+```Library status: ACTIVE ```
+> 2020
 
 ![screenshot](https://raw.githubusercontent.com/nedimf/maildroid/master/show.gif)
 Library is using Oracle [Java Mail API](https://javaee.github.io/javamail/Android) to handle connections and sending emails.
@@ -273,8 +274,6 @@ Your name here :hearts:
 
 
 ### Motivation
-
-About me: Reddit user: @nedxy [Proof for reddit ask me anything](https://www.reddit.com/user/n3dxy)
 
 Maildroid was born from the frustration of implementing a good emailing solution I had while developing a few client apps. I had to do many hours of unneeded work to make some emailing functions work using old libraries. Those libraries were limited to one SMTP server and because of that frustration ``Maildroid`` was born..
 
