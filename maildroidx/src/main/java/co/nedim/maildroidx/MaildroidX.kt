@@ -1,10 +1,10 @@
 package co.nedim.maildroidx
 
-import android.content.Context
 import android.os.Handler
 import android.util.Log
-import android.widget.Toast
 import com.sun.mail.smtp.*
+import org.jsoup.Jsoup
+import org.jsoup.safety.Whitelist
 import java.io.IOException
 import java.lang.IllegalArgumentException
 import javax.mail.*
@@ -17,11 +17,11 @@ class MaildroidX(
     val from:String?,
     val subject:String?,
     val body:String?,
+    val isJavascriptEnabled:Boolean,
     val smtp:String?,
     val smtpUsername:String?,
     val smtpPassword:String?,
     val port: String,
-    val smtpAuthentication:Boolean,
     val attachment: String?,
     val attachments: List<String>?,
     val type:String?,
@@ -32,18 +32,16 @@ class MaildroidX(
 )
 {
 
-
-
     private constructor(builder: Builder) : this(
         builder.to,
         builder.from,
         builder.subject ,
         builder.body ,
+        builder.isJavascriptDisabled,
         builder.smtp    ,
         builder.smtpUsername,
         builder.smtpPassword,
         builder.port,
-        builder.smtpAuthentication,
         builder.attachment,
         builder.attachments,
         builder.type,
@@ -61,6 +59,8 @@ class MaildroidX(
             private set
         var body:String? = null
             private set
+        var isJavascriptDisabled:Boolean = false
+            private set
         var smtp:String = ""
             private set
         var smtpUsername:String? = null
@@ -68,8 +68,6 @@ class MaildroidX(
         var smtpPassword:String? = null
             private set
         var port:String = ""
-            private set
-        var smtpAuthentication:Boolean = false
             private set
         var attachment:String? = null
             private set
@@ -92,6 +90,8 @@ class MaildroidX(
 
         fun body(body: String) = apply { this.body = body }
 
+        fun isJavascriptDisabled (isJavascriptDisabled: Boolean) = apply{ this.isJavascriptDisabled = isJavascriptDisabled}
+
         fun smtp(smtp: String) = apply { this.smtp = smtp }
 
         fun smtpUsername(smtpUsername: String) = apply { this.smtpUsername = smtpUsername }
@@ -99,8 +99,6 @@ class MaildroidX(
         fun smtpPassword(smtpPassword: String) = apply { this.smtpPassword = smtpPassword }
 
         fun port(port: String) = apply { this.port = port }
-
-        fun smtpAuthentication(smtpAuthentication: Boolean) = apply { this.smtpAuthentication = smtpAuthentication }
 
         fun attachment(attachment: String) = apply { this.attachment = attachment }
 
@@ -153,13 +151,8 @@ class MaildroidX(
                 if(smtp.isEmpty())
                     throw IllegalArgumentException("MaildroidX detected that you didn't pass [smtp] value in to the builder!")
 
-                if(!smtpAuthentication)
-                    throw IllegalArgumentException("MaildroidX detected that you didn't pass [smtpAuthentication] value to the builder!")
-
                 if(port.isEmpty())
                     throw IllegalArgumentException("MaildroidX detected that you didn't pass [port] value to the builder!")
-
-
 
                 if(smtpUsername == null)
                     throw AuthenticationFailedException("MaildroidX detected that you didn't pass [smtpUsername] or [smtpPassword] to the builder!")
@@ -167,11 +160,17 @@ class MaildroidX(
                 if(smtpPassword == null)
                     throw AuthenticationFailedException("MaildroidX detected that you didn't pass [smtpUsername] or [smtpPassword] to the builder!")
 
+                if (isJavascriptDisabled){
+
+                    Log.e("isJavascriptDisabled", "This setting to true can cause distortion problem with CSS in E-mail layout. It should be only used when CSS is not required. ")
+                    body = body?.let { strapOfUnwantedJS(it) }
+
+                }
 
                 props.put("mail.smtp.host", smtp)
                 props.put("mail.smtp.socketFactory.port", port)
                 props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
-                props.put("mail.smtp.auth", smtpAuthentication)
+                props.put("mail.smtp.auth", true)
                 props.put("mail.smtp.port", port)
 
 
@@ -295,6 +294,13 @@ class MaildroidX(
                 }
             }
             return false
+        }
+
+        fun strapOfUnwantedJS(body:String):String {
+
+            var strappedString = Jsoup.clean(body, Whitelist.relaxed().addTags("style"))
+            return strappedString
+
         }
 
 
