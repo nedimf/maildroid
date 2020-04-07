@@ -108,7 +108,6 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .smtp("")
             .smtpUsername("")
             .smtpPassword("")
-            .smtpAuthentication()
             .port("")
             .type(MaildroidXType.HTML)
             .to("")
@@ -116,6 +115,7 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .subject("")
             .body("")
             .attachment("")
+	    .isJavascriptDisabled()
 	    //or
 	    .attachments() //List<String>
 	    .onCompleteCallback(object : MaildroidX.onCompleteCallback{
@@ -161,7 +161,7 @@ sendEmail {
 
 ### Documentation
 ***
-#### Documentation for version v.0.0.3
+#### Documentation for version v.0.0.4
 - context
 > Constructor that is used to declare context **(Context)** **DEPRECATED**
 - smtp
@@ -170,8 +170,8 @@ sendEmail {
 > Constructor that is used to declare SMTP username of your server  **(String)** 
 - smtpPassword
 > Constructor that is used to declare SMTP password of your server  **(String)** 
-- smtpAuthentication
-> Constructor that is used to declare if your server needs authentication **(Boolean)** 
+- smtpAuthentication 
+> Constructor that is used to declare if your server needs authentication (DEPRECETED) **(Boolean)** 
 - port
 > Constructor that is used to declare port of your server **(String)**
 - type
@@ -186,6 +186,8 @@ sendEmail {
 >  Constructor that is used to declare subject of email your sending **(String)** 
 - body
 > Constructor that is used to declare body of email your sending **(String)** 
+- isJavascriptDisabled
+> Constructor that is used to check if javascript has to be disabled in body of an email **(Boolean)**
 - attachment
 > Constructor that is used to declare attachment of email in case that ones need to be added **(String)** 
 - attachments 
