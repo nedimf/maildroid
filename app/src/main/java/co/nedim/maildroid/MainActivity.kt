@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             .from("someoneover@interenet.com")
             .subject("Hello v1")
             .body(text)
-            .isJavascriptDisabled(false)
+            .isJavascriptDisabled(true)
             //.attachment(this@MainActivity.filesDir.path +  "/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
                 override val timeout: Long = 4000 //Add timeout accordingly
