@@ -31,7 +31,7 @@
   <a href="#faq">FAQ</a>
 </p>
 
-``Latest active version is v0.0.4``
+``Latest active version is v0.0.4-relase``
 </br>
 ```Library status: ACTIVE ```
 > 2020
@@ -68,7 +68,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.4'
+	        implementation 'com.github.nedimf:maildroid:v0.0.4-relase'
           }
 ```
 
