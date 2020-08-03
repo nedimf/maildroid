@@ -1,6 +1,7 @@
 package co.nedim.maildroidx
 
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.sun.mail.smtp.*
 import org.jsoup.Jsoup
@@ -112,8 +113,13 @@ class MaildroidX(
          */
 
         fun onCompleteCallback(successCallback: onCompleteCallback?) = apply {
+            this.successCallback = successCallback
+        }
 
-            Handler().postDelayed({
+        private fun callOnCompleteCallback() {
+            // Get the Handler of the UI Thread to run the success callback
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
                 if(mailSuccess) {
                     successCallback?.onSuccess()
                 }else{
@@ -247,7 +253,7 @@ class MaildroidX(
 
                     mailSuccess = true
 
-                    Log.w("Success", "Success, mail sent [STATUS: $mailSuccess]")
+                    Log.i("Success", "Success, mail sent [STATUS: $mailSuccess]")
 
                     /**
                      *
@@ -285,12 +291,14 @@ class MaildroidX(
                     Log.e("SMTPSenderFEx", e.toString())
                     errorMessage = e.toString()
 
-                }
-
-                catch (e: IOException){
+                }catch (e: IOException){
                     Log.e("IOException","IOException " + e.printStackTrace())
                     errorMessage = e.toString()
 
+                }finally {
+                    // Callback the onCompleteCallback when the email was sent or there was
+                    // an error. The callback will be call in the UI thread
+                    callOnCompleteCallback()
                 }
             }
             return false
@@ -315,7 +323,7 @@ class MaildroidX(
         open class Builder(
             private var onSuccess: (() -> Unit)? = null,
             private var onFail: (() -> Unit)? = null,
-            private var timeout: Long = 3000
+            private var timeout: Long = 1000
         ) {
 
             fun timeOut(timeout: Long) = apply {
