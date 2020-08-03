@@ -31,7 +31,7 @@
   <a href="#faq">FAQ</a>
 </p>
 
-``Latest active version is v0.0.4-relase``
+``Latest active version is v0.0.5``
 </br>
 ```Library status: ACTIVE ```
 > 2020
