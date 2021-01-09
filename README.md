@@ -31,10 +31,9 @@
   <a href="#faq">FAQ</a>
 </p>
 
-``Latest active version is v0.0.5``
+``Latest active version is v0.0.6``
 </br>
-```Library status: ACTIVE ```
-> 2020
+```Library status: ACTIVE```
 
 ![screenshot](https://raw.githubusercontent.com/nedimf/maildroid/master/show.gif)
 Library is using Oracle [Java Mail API](https://javaee.github.io/javamail/Android) to handle connections and sending emails.
@@ -114,8 +113,9 @@ Adding Maildroid to your app is straight forword process. Library is using Build
             .from("")
             .subject("")
             .body("")
-            .attachment("")
+            .attachment()
 	    .isJavascriptDisabled()
+	    .isisStartTLSEnabled()
 	    //or
 	    .attachments() //List<String>
 	    .onCompleteCallback(object : MaildroidX.onCompleteCallback{
@@ -188,6 +188,8 @@ sendEmail {
 > Constructor that is used to declare body of email your sending **(String)** 
 - isJavascriptDisabled
 > Constructor that is used to check if javascript has to be disabled in body of an email **(Boolean)**
+- isStartTLSEnabled
+> Constructor that is used to enable STARTLS for certain SMTP servers **(Boolean)**
 - attachment
 > Constructor that is used to declare attachment of email in case that ones need to be added **(String)** 
 - attachments 
