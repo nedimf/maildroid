@@ -45,14 +45,15 @@ class MainActivity : AppCompatActivity() {
 
         MaildroidX.Builder()
             .smtp("smtp.mailtrap.io")
-            .smtpUsername("")
-            .smtpPassword("")
+            .smtpUsername("7ff2d47a24abf8")
+            .smtpPassword("5a6043ab99038c")
             .port("2525")
             .type(MaildroidXType.HTML)
             .to(to)
             .from("someoneover@interenet.com")
-            .subject("Hello v1")
+            .subject("Hello v5")
             .body(text)
+            .isStartTLSEnabled(false)
             .isJavascriptDisabled(true)
             //.attachment(this@MainActivity.filesDir.path +  "/abc.txt")
             .onCompleteCallback(object : MaildroidX.onCompleteCallback{
@@ -81,8 +82,8 @@ class MainActivity : AppCompatActivity() {
     private fun sendDsl(to:String,text:String) {
         sendEmail {
             smtp("smtp.mailtrap.io")
-            smtpUsername("246d1daf3ff04f")
-            smtpPassword("1e8ba2dbf19f4f")
+            smtpUsername("")
+            smtpPassword("")
             port("465")
             type(MaildroidXType.HTML)
             to(to)

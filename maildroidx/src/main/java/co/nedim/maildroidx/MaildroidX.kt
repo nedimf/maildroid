@@ -22,6 +22,7 @@ class MaildroidX(
     val smtp:String?,
     val smtpUsername:String?,
     val smtpPassword:String?,
+    val isStartTLSEnabled:Boolean,
     val port: String,
     val attachment: String?,
     val attachments: List<String>?,
@@ -42,6 +43,7 @@ class MaildroidX(
         builder.smtp    ,
         builder.smtpUsername,
         builder.smtpPassword,
+        builder.isStartTLSEnabled,
         builder.port,
         builder.attachment,
         builder.attachments,
@@ -67,6 +69,8 @@ class MaildroidX(
         var smtpUsername:String? = null
             private set
         var smtpPassword:String? = null
+            private set
+        var isStartTLSEnabled: Boolean = false
             private set
         var port:String = ""
             private set
@@ -98,6 +102,8 @@ class MaildroidX(
         fun smtpUsername(smtpUsername: String) = apply { this.smtpUsername = smtpUsername }
 
         fun smtpPassword(smtpPassword: String) = apply { this.smtpPassword = smtpPassword }
+
+        fun isStartTLSEnabled(isStartTLSEnabled: Boolean) = apply { this.isStartTLSEnabled = isStartTLSEnabled }
 
         fun port(port: String) = apply { this.port = port }
 
@@ -133,7 +139,7 @@ class MaildroidX(
          */
 
         fun mail() {
-                send() //Check for internet connection is DEPRECATED in version 0.0.3
+            send() //Check for internet connection is DEPRECATED in version 0.0.3
         }
 
 
@@ -179,7 +185,13 @@ class MaildroidX(
                 props.put("mail.smtp.auth", true)
                 props.put("mail.smtp.port", port)
 
-
+                if (isStartTLSEnabled){
+                    Log.i("isStartTLSEnabled", "Your SMTP server has to support STARTTLS, to use this option")
+                    props.put("mail.smtp.starttls.enable",true)
+                }else{
+                    Log.i("isStartTLSEnabled", "MaildroidX: STARTTLS is disabled")
+                    props.put("mail.smtp.starttls.enable",false)
+                }
 
                 val session =  Session.getInstance(props,
                     object : javax.mail.Authenticator() {
@@ -227,7 +239,7 @@ class MaildroidX(
                      * Checking if there is any files in attachment constructor.
                      * If there is files in attachments ,make multipart for each of it
                      * Add it to multipart for sending
-                     * If there is no attachments processed with sing attachment if it s not null
+                     * If there is no attachments processed with single attachment if it s not null
                      */
                     if(attachments != null && attachments!!.isNotEmpty() && attachments!!.size > 1){
 
@@ -237,7 +249,7 @@ class MaildroidX(
                             multipart.addBodyPart(attachmentPart)
                         }
                     }else{
-                            attachment?.let { filename ->
+                        attachment?.let { filename ->
                             messageBodyPart.attachFile(filename)
                             multipart.addBodyPart(messageBodyPart)
                         }
@@ -259,14 +271,14 @@ class MaildroidX(
                      *
                      * @exception MessagingException The base class for all exceptions thrown by the Messaging classes
                      * @exception SMTPAddressSucceededException extends MessagingException
-                       This exception is chained off a SendFailedException when the mail.smtp.reportsuccess property is true. It indicates an address to which the message was sent. The command will be an SMTP RCPT command and the return code will be the return code from that command.
+                    This exception is chained off a SendFailedException when the mail.smtp.reportsuccess property is true. It indicates an address to which the message was sent. The command will be an SMTP RCPT command and the return code will be the return code from that command.
                      * @exception SMTPAddressFailedException extends MessagingException
                      * This exception is thrown when the message cannot be sent.
-                       The exception includes those addresses to which the message could not be sent as well as the valid addresses to which the message was sent and valid addresses to which the message was not sent.
+                    The exception includes those addresses to which the message could not be sent as well as the valid addresses to which the message was sent and valid addresses to which the message was not sent.
                      * @exception SMTPSendFailedException
-                        This exception will usually appear first in a chained list of exceptions, followed by SMTPAddressFailedExceptions and/or SMTPAddressSucceededExceptions, * one per address. This exception corresponds to one of the SMTP commands used to send a message, such as the MAIL, DATA, and "end of data" commands, but not including the RCPT command.
+                    This exception will usually appear first in a chained list of exceptions, followed by SMTPAddressFailedExceptions and/or SMTPAddressSucceededExceptions, * one per address. This exception corresponds to one of the SMTP commands used to send a message, such as the MAIL, DATA, and "end of data" commands, but not including the RCPT command.
                      * @exception SMTPSenderFailedException
-                       The exception includes the sender's address, which the mail server rejected.
+                    The exception includes the sender's address, which the mail server rejected.
                      */
 
                 } catch (e: MessagingException) {
@@ -355,6 +367,3 @@ class MaildroidX(
 
 
 }
-
-
-
