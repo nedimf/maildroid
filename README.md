@@ -331,5 +331,3 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### Designer credits
 Icon made by [Designer](https://www.flaticon.com/authors/kiranshastry) & [Freepik](https://www.flaticon.com/authors/freepik) from [flaticon](https://www.flaticon.com/authors/freepik)
-
-
