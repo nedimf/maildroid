@@ -67,7 +67,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.4-relase'
+	        implementation 'com.github.nedimf:maildroid:v0.0.6-release'
           }
 ```
 
@@ -93,7 +93,7 @@ Add the dependency
 <dependency>
      <groupId>com.github.nedimf</groupId>
      <artifactId>maildroid</artifactId>
-     <version>v0.0.2</version>
+     <version>v0.0.6-release</version>
 </dependency>
 ```
 </p>
