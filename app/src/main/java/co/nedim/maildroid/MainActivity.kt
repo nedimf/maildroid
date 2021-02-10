@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
         pd.show()
 
         MaildroidX.Builder()
-            .smtp("smtp.mailtrap.io")
-            .smtpUsername("7ff2d47a24abf8")
-            .smtpPassword("5a6043ab99038c")
+            .smtp("")
+            .smtpUsername("")
+            .smtpPassword("")
             .port("2525")
             .type(MaildroidXType.HTML)
             .to(to)
