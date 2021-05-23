@@ -1,82 +1,86 @@
 package co.nedim.maildroid
 
-import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.children
+import co.nedim.maildroid.databinding.ActivityMainBinding
 import co.nedim.maildroidx.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val toMail: EditText = findViewById(R.id.mail)
-        val text:EditText = findViewById(R.id.text)
-        val send:Button = findViewById(R.id.sendBTN)
+        //Bind Layout
+        val binding = ActivityMainBinding.inflate(layoutInflater)
 
-        send.setOnClickListener(View.OnClickListener {
-            val recipient = toMail.text.toString()
-            val text = text.text.toString()
 
-            if(recipient.isNotEmpty() || text.isNotEmpty()){
-                send(recipient,text)
-            }else{
-                Toast.makeText(this@MainActivity,"Please check your input",Toast.LENGTH_SHORT).show()
+
+        setContentView(binding.root)
+
+        binding.btnSend.setOnClickListener {
+
+            val sbSendEmail = Snackbar.make(binding.root, "Sending email...", Snackbar.LENGTH_INDEFINITE)
+            sbSendEmail.show()
+
+            //Make sure all fields are filled out
+            for(view in binding.root.children){
+                if(view.id == R.id.etCC || view.id == R.id.etBCC) continue
+                if(view is EditText){
+                    if(view.text.toString() == ""){
+                        sbSendEmail.dismiss()
+                        view.requestFocus()
+                        Snackbar.make(binding.root, "Please fill out all fields!", Snackbar.LENGTH_LONG).show()
+                        return@setOnClickListener
+                    }
+                }
             }
 
+            val emailType = if (binding.rbHTML.isChecked) MaildroidXType.HTML else MaildroidXType.PLAIN
+            val toEmails = binding.etTO.text.toString().split(";")
+            val ccEmails = binding.etCC.text.toString().split(";")
+            val bccEmails = binding.etBCC.text.toString().split(";")
 
-        })
-    }
+            MaildroidX.Builder()
+                .smtp(binding.etSMTP.text.toString())
+                .port(binding.etSMTPPort.text.toString())
+                .smtpUsername(binding.etSMTPUserFrom.text.toString())
+                .smtpPassword(binding.etSMTPPass.text.toString())
+                .isStartTLSEnabled(binding.tbStartTLS.isChecked)
+                .isJavascriptDisabled(!binding.tbJavascript.isChecked)
+                .type(emailType)
+                .from(binding.etSMTPUserFrom.text.toString())
+                .to(toEmails)
+                .cc(ccEmails)
+                .bcc(bccEmails)
+                .subject(binding.etSubject.text.toString())
+                .body(binding.etBody.text.toString())
+                .onCompleteCallback(object : MaildroidX.onCompleteCallback{
+                    override fun onSuccess() {
+                        sbSendEmail.dismiss()
+                        Snackbar.make(binding.root, "Email Sent!", Snackbar.LENGTH_LONG).show()
+                    }
+
+                    override fun onFail(errorMessage: String) {
+                        sbSendEmail.dismiss()
+                        Snackbar.make(binding.root, "Error Sending Email! $errorMessage", Snackbar.LENGTH_LONG).show()
+                    }
+
+                    override val timeout: Long
+                        get() = 4000
+                })
+                .mail()
 
 
-    fun send(to:String,text:String){
-
-        val pd:ProgressDialog = ProgressDialog(this@MainActivity)
-        pd.setTitle("Send email")
-        pd.setMessage("Sending...")
-        pd.show()
-
-        MaildroidX.Builder()
-            .smtp("")
-            .smtpUsername("")
-            .smtpPassword("")
-            .port("2525")
-            .type(MaildroidXType.HTML)
-            .to(to)
-            .from("someoneover@interenet.com")
-            .subject("Hello v5")
-            .body(text)
-            .isStartTLSEnabled(false)
-            .isJavascriptDisabled(true)
-            //.attachment(this@MainActivity.filesDir.path +  "/abc.txt")
-            .onCompleteCallback(object : MaildroidX.onCompleteCallback{
-                override val timeout: Long = 4000 //Add timeout accordingly
-
-                override fun onSuccess() {
-                    Toast.makeText(this@MainActivity,"Mail sent!",Toast.LENGTH_SHORT).show()
-                    pd.cancel()
-
-                }
-
-                override fun onFail(errorMessage: String) {
-
-                    Toast.makeText(this@MainActivity, errorMessage,Toast.LENGTH_SHORT).show()
-                    pd.cancel()
-                }
-
-            })
-            .mail()
+        }
     }
 
     companion object {
-        val TAG = MainActivity::class.java.name
+        val TAG: String = MainActivity::class.java.name
     }
 
     private fun sendDsl(to:String,text:String) {
