@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Maildroid</string>
+    <string name="smtp_server">SMTP Server</string>
+    <string name="smtp_username">SMTP Username/From</string>
+    <string name="smtp_password">SMTP Password</string>
+    <string name="smtp_port">SMTP Port</string>
+    <string name="html">HTML</string>
+    <string name="text">TEXT</string>
+    <string name="email_type">Email Type</string>
+    <string name="to_hint">TO (separate multiple emails with \";\")</string>
+    <string name="cc_hint">CC (separate multiple emails with \";\")</string>
+    <string name="bcc_hint">BCC (separate multiple emails with \";\")</string>
+    <string name="subject">Subject</string>
+    <string name="email_body">Email Body</string>
+    <string name="smtp_StartTLS">StartTLS</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="javascript">JavaScript</string>
+    <string name="send_email">Send Email</string>
 </resources>

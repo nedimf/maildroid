@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
 
-    <EditText
+    <!-- <EditText
             android:layout_width="347dp"
             android:layout_height="53dp"
             android:inputType="textEmailAddress"
@@ -42,6 +41,186 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.109"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="34dp"
             android:layout_marginStart="34dp" android:layout_marginEnd="34dp" android:layout_marginRight="34dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>-->
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <EditText
+                    android:id="@+id/etSMTP"
+                    style="@style/myTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/smtp_server"
+                    android:importantForAutofill="no"
+                    android:inputType="text" />
+
+            <EditText
+                    android:id="@+id/etSMTPPort"
+                    style="@style/myTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/smtp_port"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
+
+            <EditText
+                    android:id="@+id/etSMTPUserFrom"
+                    style="@style/myTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/smtp_username"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress" />
+
+            <EditText
+                    android:id="@+id/etSMTPPass"
+                    style="@style/myTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/smtp_password"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            style="@style/myTheme"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/smtp_StartTLS" />
+
+                    <ToggleButton
+                            android:id="@+id/tbStartTLS"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/myTheme"
+                            android:textOn="@string/enabled"
+                            android:textOff="@string/disabled"/>
+
+                </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        style="@style/myTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/javascript" />
+
+                <ToggleButton
+                        android:id="@+id/tbJavascript"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/myTheme"
+                        android:textOn="@string/enabled"
+                        android:textOff="@string/disabled" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        style="@style/myTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/email_type" />
+
+                <RadioGroup
+                        style="@style/myTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                    <RadioButton
+                            android:id="@+id/rbHTML"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/html" />
+
+                    <RadioButton
+                            android:id="@+id/rbText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <EditText
+                    android:id="@+id/etTO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/to_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    style="@style/myTheme"/>
+            <EditText
+                    android:id="@+id/etCC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cc_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    style="@style/myTheme"/>
+            <EditText
+                    android:id="@+id/etBCC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/bcc_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    style="@style/myTheme"/>
+            <EditText
+                    android:id="@+id/etSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/subject"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailSubject"
+                    style="@style/myTheme"/>
+
+            <EditText
+                    android:id="@+id/etBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    style="@style/myTheme"
+                    android:hint="@string/email_body"
+                    android:scrollHorizontally="false"/>
+
+            <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_email"
+                    style="@style/myTheme"/>
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
