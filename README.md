@@ -31,7 +31,7 @@
   <a href="#faq">FAQ</a>
 </p>
 
-``Latest active version is v0.0.6``
+``Latest active version is v0.0.8``
 </br>
 ```Library status: ACTIVE```
 
@@ -67,7 +67,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.6-release'
+	        implementation 'com.github.nedimf:maildroid:v0.0.8-release'
           }
 ```
 
@@ -93,7 +93,7 @@ Add the dependency
 <dependency>
      <groupId>com.github.nedimf</groupId>
      <artifactId>maildroid</artifactId>
-     <version>v0.0.6-release</version>
+     <version>v0.0.8-release</version>
 </dependency>
 ```
 </p>
@@ -305,7 +305,7 @@ Maildroid was born from the frustration of implementing a good emailing solution
 
 - How to use Google `` gmail `` smtp server 
 > As stated above every smtp server that uses SSL should be supported.<br>Tutorial how to use ``smtp.gmail.com``: <br>
-  - If you choose this SMTP server we suggest making brand new account and enabling **less secure apps** in settings. [Google support link](https://support.google.com/accounts/answer/6010255?hl=en)
+  - If you choose this SMTP server we suggest making brand new account and enabling **less secure apps** in settings. [Google support link](https://support.google.com/accounts/answer010255?hl=en)
   - **``` smtp.("smtp.gmail.com")  ```**
   - **``` smtpUsername.("")  ```** your gmail email adress
   - **``` smtpPassword.("")  ```** your gmail password
