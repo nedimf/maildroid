@@ -3,12 +3,18 @@ package co.nedim.maildroidx
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.sun.mail.smtp.*
+import com.sun.mail.smtp.SMTPAddressFailedException
+import com.sun.mail.smtp.SMTPAddressSucceededException
+import com.sun.mail.smtp.SMTPSendFailedException
+import com.sun.mail.smtp.SMTPSenderFailedException
+import jakarta.mail.*
+import jakarta.mail.internet.InternetAddress
+import jakarta.mail.internet.MimeBodyPart
+import jakarta.mail.internet.MimeMessage
+import jakarta.mail.internet.MimeMultipart
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.io.IOException
-import javax.mail.*
-import javax.mail.internet.*
 
 
 class MaildroidX(
@@ -229,7 +235,7 @@ class MaildroidX(
                 }
 
                 val session = Session.getInstance(props,
-                    object : javax.mail.Authenticator() {
+                    object : Authenticator() {
                         //Authenticating the password
                         override fun getPasswordAuthentication(): PasswordAuthentication {
                             return PasswordAuthentication(smtpUsername, smtpPassword)

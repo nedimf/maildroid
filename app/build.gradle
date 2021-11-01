@@ -30,6 +30,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE.md' // picks the Jakarta Mail license file
+        pickFirst 'META-INF/NOTICE.md' // picks the Jakarta Mail notice file
+    }
+
 }
 
 dependencies {
