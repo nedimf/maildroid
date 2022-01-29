@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.nedim.co"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="nedim.co" width="200"></a>
+  <a href="http://www.nedimcodes.com"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="nedimcodes.com" width="200"></a>
   <br>
   Maildroid
   <br>
@@ -15,7 +15,7 @@
 <img alt="JitPack" src="https://img.shields.io/jitpack/v/github/nedimf/maildroid?color=%230000&style=flat-square">
 <a href="https://www.codacy.com/app/nedx45/maildroid?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nedimf/maildroid&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/0e4b1eea545649cbbc459d0a54bf64af"/></a>
  <a href="https://www.reddit.com/r/androiddev/comments/cotfeb/maildroid_new_email_library/"><img alt="Reddit" src="https://img.shields.io/badge/Reddit-androiddev-orange"></a>
- <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/nedimcodes?color=%23&label=Follow&style=social">
+ <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/nedim0x01?color=%23&label=Follow&style=social">
 	
 	
 </p>
@@ -31,7 +31,7 @@
   <a href="#faq">FAQ</a>
 </p>
 
-``Latest active version is v0.0.8``
+``Latest active version is v0.1.0-release``
 </br>
 ```Library status: ACTIVE```
 
