@@ -25,9 +25,7 @@ import java.io.IOException
 
 class MaildroidX(
     val toRecipients: List<String>?,
-    val cc: String?,
     val ccRecipients: List<String>?,
-    val bcc: String?,
     val bccRecipients: List<String>?,
     val from: String?,
     val subject: String?,
@@ -50,9 +48,7 @@ class MaildroidX(
 
     private constructor(builder: Builder) : this(
         builder.toRecipients,
-        builder.cc,
         builder.ccRecipients,
-        builder.bcc,
         builder.bccRecipients,
         builder.from,
         builder.subject,
@@ -74,13 +70,9 @@ class MaildroidX(
     open class Builder {
         var toRecipients: MutableList<String>? = null
             private set
-        var cc: String? = null
+        var ccRecipients: MutableList<String>? = null
             private set
-        var ccRecipients: List<String>? = null
-            private set
-        var bcc: String? = null
-            private set
-        var bccRecipients: List<String>? = null
+        var bccRecipients: MutableList<String>? = null
             private set
         var from: String? = null
             private set
@@ -122,13 +114,13 @@ class MaildroidX(
             }
         }
 
-        fun cc(cc: String) = apply { this.cc = cc }
+        fun cc(cc: String) = apply { this.ccRecipients?.add(cc) ?: run { this.ccRecipients = mutableListOf(cc)}}
 
-        fun cc(cc: List<String>) = apply { this.ccRecipients = cc }
+        fun cc(cc: List<String>) = apply { this.ccRecipients?.addAll(cc) ?: run { this.ccRecipients = cc.toMutableList() }}
 
-        fun bcc(bcc: String) = apply { this.bcc = bcc }
+        fun bcc(bcc: String) = apply { this.bccRecipients?.add(bcc) ?: run { this.bccRecipients = mutableListOf(bcc)}}
 
-        fun bcc(bcc: List<String>) = apply { this.bccRecipients = bcc }
+        fun bcc(bcc: List<String>) = apply { this.bccRecipients?.addAll(bcc) ?: run { this.bccRecipients = bcc.toMutableList() }}
 
         fun from(from: String) = apply { this.from = from }
 
@@ -165,7 +157,7 @@ class MaildroidX(
         }
 
         fun attachments(attachments: List<MaildroidXAttachment>) {
-            this.attachments = attachments.toMutableList()
+            this.attachments?.addAll(attachments) ?: run { this.attachments = attachments.toMutableList() }
         }
 
         fun type(type: MaildroidXType) = apply { this.type = type.toString() }
@@ -283,48 +275,18 @@ class MaildroidX(
                         )
                     }
 
-                    /**
-                     * Checking if there is any cc recipients in cc constructor.
-                     * If there is cc recipients in ccRecipients, add them to the message
-                     * If there is no cc recipients processed with single cc recipient if it's not null
-                     */
-                    if (ccRecipients != null && ccRecipients!!.isNotEmpty() && ccRecipients!!.size > 1) {
-                        for (email in ccRecipients!!) {
-                            message.addRecipients(
-                                Message.RecipientType.CC,
-                                InternetAddress.parse(email.trim())
-                            )
-                        }
-                    } else {
-                        // Set CC: header field of the header.
-                        cc?.let { email ->
-                            message.addRecipients(
-                                Message.RecipientType.CC,
-                                InternetAddress.parse(email.trim())
-                            )
-                        }
+                    ccRecipients?.forEach { email ->
+                        message.addRecipients(
+                            Message.RecipientType.CC,
+                            InternetAddress.parse(email.trim())
+                        )
                     }
 
-                    /**
-                     * Checking if there is any bcc recipients in bcc constructor.
-                     * If there is bcc recipients in bccRecipients, add them to the message
-                     * If there is no bcc recipients processed with single bcc recipient if it's not null
-                     */
-                    if (bccRecipients != null && bccRecipients!!.isNotEmpty() && bccRecipients!!.size > 1) {
-                        for (email in bccRecipients!!) {
-                            message.addRecipients(
-                                Message.RecipientType.BCC,
-                                InternetAddress.parse(email.trim())
-                            )
-                        }
-                    } else {
-                        // Set BCC: header field of the header.
-                        bcc?.let { email ->
-                            message.addRecipients(
-                                Message.RecipientType.BCC,
-                                InternetAddress.parse(email.trim())
-                            )
-                        }
+                    bccRecipients?.forEach { email ->
+                        message.addRecipients(
+                            Message.RecipientType.BCC,
+                            InternetAddress.parse(email.trim())
+                        )
                     }
 
                     // Set Subject: header field
@@ -353,8 +315,8 @@ class MaildroidX(
                         it.forEach { attachment ->
                             val attachmentPart = MimeBodyPart()
                             attachmentPart.attachFile(attachment.uri)
-                            attachment.filename?.let {
-                                attachmentPart.fileName = it
+                            attachment.filename?.let { filename ->
+                                attachmentPart.fileName = filename
                             }
                             multipart.addBodyPart(attachmentPart)
                         }
