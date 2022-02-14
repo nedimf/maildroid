@@ -44,6 +44,9 @@ class MaildroidX(
     val successCallback: onCompleteCallback?,
     val mailSuccess: Boolean?
 ) {
+    companion object {
+        const val TAG = "MaildroidX"
+    }
 
     private constructor(builder: Builder) : this(
         builder.toRecipients,
@@ -228,8 +231,8 @@ class MaildroidX(
                 if (isJavascriptDisabled) {
 
                     Log.e(
-                        "isJavascriptDisabled",
-                        "This setting to true can cause distortion problem with CSS in E-mail layout. It should be only used when CSS is not required. "
+                        TAG,
+                        "isJavascriptDisabled is set to true : this setting to true can cause distortion problem with CSS in E-mail layout. It should be only used when CSS is not required. "
                     )
                     body = body?.let { strapOfUnwantedJS(it) }
 
@@ -243,12 +246,12 @@ class MaildroidX(
 
                 if (isStartTLSEnabled) {
                     Log.i(
-                        "isStartTLSEnabled",
-                        "Your SMTP server has to support STARTTLS, to use this option"
+                        TAG,
+                        "STARTTLS is enabled. Your SMTP server has to support STARTTLS to use this option"
                     )
                     props["mail.smtp.starttls.enable"] = true
                 } else {
-                    Log.i("isStartTLSEnabled", "MaildroidX: STARTTLS is disabled")
+                    Log.i(TAG, "STARTTLS is disabled")
                     props["mail.smtp.starttls.enable"] = false
                 }
 
@@ -367,7 +370,7 @@ class MaildroidX(
 
                     mailSuccess = true
 
-                    Log.i("Success", "Success, mail sent [STATUS: $mailSuccess]")
+                    Log.i(TAG, "Success, mail sent [STATUS: $mailSuccess]")
 
                     /**
                      *
@@ -384,28 +387,28 @@ class MaildroidX(
                      */
 
                 } catch (e: MessagingException) {
-                    Log.e("MessagingException", e.toString())
+                    Log.e(TAG, "MessagingException : ${e.message}")
                     errorMessage = e.toString()
                 } catch (e: SMTPAddressSucceededException) {
-                    Log.e("SMTPAddressSEx", e.toString())
+                    Log.e(TAG, "SMTPAddressSucceededException : ${e.message}")
                     errorMessage = e.toString()
 
                 } catch (e: SMTPAddressFailedException) {
-                    Log.e("SMTPAddressFEx", e.toString())
+                    Log.e(TAG, "SMTPAddressFailedException : ${e.message}")
                     errorMessage = e.toString()
 
 
                 } catch (e: SMTPSendFailedException) {
-                    Log.e("SMTPSendFEx", e.toString())
+                    Log.e(TAG, "SMTPSendFailedException : ${e.message}")
                     errorMessage = e.toString()
 
 
                 } catch (e: SMTPSenderFailedException) {
-                    Log.e("SMTPSenderFEx", e.toString())
+                    Log.e(TAG, "SMTPSenderFailedException : ${e.message}")
                     errorMessage = e.toString()
 
                 } catch (e: IOException) {
-                    Log.e("IOException", "IOException " + e.printStackTrace())
+                    Log.e(TAG, "IOException : ${e.message}")
                     errorMessage = e.toString()
 
                 } finally {
