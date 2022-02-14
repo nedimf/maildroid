@@ -7,7 +7,14 @@ import com.sun.mail.smtp.SMTPAddressFailedException
 import com.sun.mail.smtp.SMTPAddressSucceededException
 import com.sun.mail.smtp.SMTPSendFailedException
 import com.sun.mail.smtp.SMTPSenderFailedException
-import jakarta.mail.*
+import jakarta.mail.AuthenticationFailedException
+import jakarta.mail.Authenticator
+import jakarta.mail.PasswordAuthentication
+import jakarta.mail.Session
+import jakarta.mail.Message
+import jakarta.mail.BodyPart
+import jakarta.mail.Transport
+import jakarta.mail.MessagingException
 import jakarta.mail.internet.InternetAddress
 import jakarta.mail.internet.MimeBodyPart
 import jakarta.mail.internet.MimeMessage
@@ -16,9 +23,7 @@ import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.io.IOException
 
-
 class MaildroidX(
-    val to: String?,
     val toRecipients: List<String>?,
     val cc: String?,
     val ccRecipients: List<String>?,
@@ -33,17 +38,14 @@ class MaildroidX(
     val smtpPassword: String?,
     val isStartTLSEnabled: Boolean,
     val port: String,
-    val attachment: String?,
-    val attachments: List<String>?,
+    val attachment: MaildroidXAttachment?,
+    val attachments: List<MaildroidXAttachment>?,
     val type: String?,
     val successCallback: onCompleteCallback?,
     val mailSuccess: Boolean?
-
-
 ) {
 
     private constructor(builder: Builder) : this(
-        builder.to,
         builder.toRecipients,
         builder.cc,
         builder.ccRecipients,
@@ -67,9 +69,7 @@ class MaildroidX(
 
 
     open class Builder {
-        var to: String? = null
-            private set
-        var toRecipients: List<String>? = null
+        var toRecipients: MutableList<String>? = null
             private set
         var cc: String? = null
             private set
@@ -97,9 +97,9 @@ class MaildroidX(
             private set
         var port: String = ""
             private set
-        var attachment: String? = null
+        var attachment: MaildroidXAttachment? = null
             private set
-        var attachments: List<String>? = null
+        var attachments: MutableList<MaildroidXAttachment>? = null
             private set
         var type: String? = null
             private set
@@ -110,9 +110,14 @@ class MaildroidX(
 
         private var errorMessage: String? = null
 
-        fun to(to: String) = apply { this.to = to }
+        fun to(to: String) =
+            apply { this.toRecipients?.add(to) ?: run { this.toRecipients = mutableListOf(to) } }
 
-        fun to(to: List<String>) = apply { this.toRecipients = to }
+        fun to(to: List<String>) = apply {
+            this.toRecipients?.addAll(to) ?: run {
+                this.toRecipients = to.toMutableList()
+            }
+        }
 
         fun cc(cc: String) = apply { this.cc = cc }
 
@@ -142,9 +147,23 @@ class MaildroidX(
 
         fun port(port: String) = apply { this.port = port }
 
-        fun attachment(attachment: String) = apply { this.attachment = attachment }
+        fun attachment(attachment: String) = apply {
+            this.attachment(MaildroidXAttachment(attachment, attachment))
+        }
 
-        fun attachments(attachments: List<String>) = apply { this.attachments = attachments }
+        fun attachment(attachment: MaildroidXAttachment) {
+            this.attachments?.add(attachment) ?: run {
+                this.attachments = mutableListOf(attachment)
+            }
+        }
+
+        fun attachments(attachments: List<String>) = apply {
+            attachments(attachments.map { uri -> MaildroidXAttachment(uri, uri) })
+        }
+
+        fun attachments(attachments: List<MaildroidXAttachment>) {
+            this.attachments = attachments.toMutableList()
+        }
 
         fun type(type: MaildroidXType) = apply { this.type = type.toString() }
 
@@ -181,16 +200,15 @@ class MaildroidX(
         /**
          * method send() is sending email through SMTP server
          */
-        fun send(): Boolean {
+        private fun send(): Boolean {
 
+            val typeHTML = "text/html; charset=utf-8"
+            val typePLAIN = "text/plain"
 
-            val typeHTML: String = "text/html; charset=utf-8"
-            val typePLAIN: String = "text/plain"
-
-            if (type.equals("HTML"))
-                type = typeHTML
+            type = if (type.equals("HTML"))
+                typeHTML
             else
-                type = typePLAIN
+                typePLAIN
 
             AppExecutors().diskIO().execute {
                 val props = System.getProperties()
@@ -217,21 +235,21 @@ class MaildroidX(
 
                 }
 
-                props.put("mail.smtp.host", smtp)
-                props.put("mail.smtp.socketFactory.port", port)
-                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
-                props.put("mail.smtp.auth", true)
-                props.put("mail.smtp.port", port)
+                props["mail.smtp.host"] = smtp
+                props["mail.smtp.socketFactory.port"] = port
+                props["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
+                props["mail.smtp.auth"] = true
+                props["mail.smtp.port"] = port
 
                 if (isStartTLSEnabled) {
                     Log.i(
                         "isStartTLSEnabled",
                         "Your SMTP server has to support STARTTLS, to use this option"
                     )
-                    props.put("mail.smtp.starttls.enable", true)
+                    props["mail.smtp.starttls.enable"] = true
                 } else {
                     Log.i("isStartTLSEnabled", "MaildroidX: STARTTLS is disabled")
-                    props.put("mail.smtp.starttls.enable", false)
+                    props["mail.smtp.starttls.enable"] = false
                 }
 
                 val session = Session.getInstance(props,
@@ -252,25 +270,14 @@ class MaildroidX(
 
 
                     /**
-                     * Checking if there is any to recipients in to constructor.
-                     * If there is to recipients in toRecipients, add them to the message
-                     * If there is no to recipients processed with single to recipient if it's not null
+                     * Iterate on the recipientList to add recipients to the message
                      */
-                    if (toRecipients != null && toRecipients!!.isNotEmpty() && toRecipients!!.size > 1) {
-                        for (email in toRecipients!!) {
-                            message.addRecipients(
-                                Message.RecipientType.TO,
-                                InternetAddress.parse(email.trim())
-                            )
-                        }
-                    } else {
-                        // Set To: header field of the header.
-                        to?.let { email ->
-                            message.addRecipients(
-                                Message.RecipientType.TO,
-                                InternetAddress.parse(email.trim())
-                            )
-                        }
+
+                    toRecipients?.forEach { email ->
+                        message.addRecipients(
+                            Message.RecipientType.TO,
+                            InternetAddress.parse(email.trim())
+                        )
                     }
 
                     /**
@@ -321,7 +328,7 @@ class MaildroidX(
                     message.subject = subject
 
                     // Create the message part
-                    var messageBodyPart: BodyPart = MimeBodyPart()
+                    val messageBodyPart: BodyPart = MimeBodyPart()
 
                     // Now set the actual message
                     messageBodyPart.setContent(body, type)
@@ -332,26 +339,21 @@ class MaildroidX(
                     // Set text message part
                     multipart.addBodyPart(messageBodyPart)
 
-                    // Part two is attachment
-                    messageBodyPart = MimeBodyPart()
-
                     /**
                      * Checking if there is any files in attachment constructor.
                      * If there is files in attachments ,make multipart for each of it
                      * Add it to multipart for sending
                      * If there is no attachments processed with single attachment if it s not null
                      */
-                    if (attachments != null && attachments!!.isNotEmpty() && attachments!!.size > 1) {
 
-                        for (i in attachments!!) {
+                    attachments?.let {
+                        it.forEach { attachment ->
                             val attachmentPart = MimeBodyPart()
-                            attachmentPart.attachFile(i)
+                            attachmentPart.attachFile(attachment.uri)
+                            attachment.filename?.let {
+                                attachmentPart.fileName = it
+                            }
                             multipart.addBodyPart(attachmentPart)
-                        }
-                    } else {
-                        attachment?.let { filename ->
-                            messageBodyPart.attachFile(filename)
-                            multipart.addBodyPart(messageBodyPart)
                         }
                     }
 
@@ -415,14 +417,9 @@ class MaildroidX(
             return false
         }
 
-        fun strapOfUnwantedJS(body: String): String {
-
-            var strappedString = Jsoup.clean(body, Whitelist.relaxed().addTags("style"))
-            return strappedString
-
+        private fun strapOfUnwantedJS(body: String): String {
+            return Jsoup.clean(body, Whitelist.relaxed().addTags("style"))
         }
-
-
     }
 
     interface onCompleteCallback {
@@ -463,6 +460,4 @@ class MaildroidX(
             }
         }
     }
-
-
 }
