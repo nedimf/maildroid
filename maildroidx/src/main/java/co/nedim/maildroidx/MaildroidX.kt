@@ -7,11 +7,9 @@ import com.sun.mail.smtp.SMTPAddressFailedException
 import com.sun.mail.smtp.SMTPAddressSucceededException
 import com.sun.mail.smtp.SMTPSendFailedException
 import com.sun.mail.smtp.SMTPSenderFailedException
-import jakarta.mail.*
-import jakarta.mail.internet.InternetAddress
-import jakarta.mail.internet.MimeBodyPart
-import jakarta.mail.internet.MimeMessage
-import jakarta.mail.internet.MimeMultipart
+import com.sun.mail.smtp.*
+import javax.mail.*
+import javax.mail.internet.*
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.io.IOException
