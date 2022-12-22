@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="http://www.nedimcodes.com"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="nedimcodes.com" width="200"></a>
+  <a href="http://www.nedimfakic.com"><img src="https://raw.githubusercontent.com/nedimf/maildroid/master/maildroid.png" alt="nedimfakic.com" width="200"></a>
   <br>
   Maildroid
   <br>
@@ -31,7 +31,7 @@
   <a href="#faq">FAQ</a>
 </p>
 
-``Latest active version is v0.1.0-release``
+``Latest active version is v0.1.1-release``
 </br>
 ```Library status: ACTIVE```
 
@@ -67,7 +67,7 @@ Add dependency
 ```gradle
 
 dependencies {
-	        implementation 'com.github.nedimf:maildroid:v0.0.8-release'
+	        implementation 'com.github.nedimf:maildroid:v0.1.1-release'
           }
 ```
 
@@ -93,7 +93,7 @@ Add the dependency
 <dependency>
      <groupId>com.github.nedimf</groupId>
      <artifactId>maildroid</artifactId>
-     <version>v0.0.8-release</version>
+     <version>v0.1.1-release</version>
 </dependency>
 ```
 </p>
